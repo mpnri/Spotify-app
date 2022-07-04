@@ -1,3 +1,3 @@
 # Spotify-app
 
-a music player Web-app with parcel & typescript
+a music player web-app with parcel & typescript
