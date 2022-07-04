@@ -1,0 +1,18 @@
+# .vscode folder
+.vscode/
+
+# Project folder
+todo-app-master/
+
+# .zip files
+*.zip
+
+# Pinegrow files
+_pgbackup/
+_pginfo/
+pinegrow.json
+
+# npm & parcel files
+node_modules/
+dist/
+.parcel-cache/
