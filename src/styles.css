@@ -346,6 +346,10 @@ body {
     padding-inline: 1rem;
 }
 
+.tab a {
+    all: unset;
+}
+
 .tab-lg {
     margin-top: 3rem;
     gap: 1.5rem;
@@ -424,6 +428,14 @@ body {
 /** albums end */
 
 
+/** artists start*/
+
+.artists .item-info {
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 19px;
+    letter-spacing: -0.03em;
+}
 
 
 
