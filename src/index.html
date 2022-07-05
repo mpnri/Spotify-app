@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="fade"></div>
+    <div class="fade home-fade"></div>
     <div class="home">
         <div class="toolbar">
             <img src="assets/icons/settings.svg" alt="settings" class="toolbar__settings">
@@ -51,19 +51,19 @@
             <div class="list-title"><h2>Recently played</h2></div>
             <div class="list-items">
                 <div class="list-item">
-                    <img src="assets/images/Study Beats.png" alt="list-img" class="list-img">
+                    <img src="assets/images/Study Beats.png" alt="item-img" class="item-img">
                     <div class="item-title">Study Beats</div>
                 </div>
                 <div class="list-item">
-                    <img src="assets/images/Study Beats.png" alt="list-img" class="list-img">
+                    <img src="assets/images/Study Beats.png" alt="item-img" class="item-img">
                     <div class="item-title">Study Beats</div>
                 </div>
                 <div class="list-item">
-                    <img src="assets/images/Study Beats.png" alt="list-img" class="list-img">
+                    <img src="assets/images/Study Beats.png" alt="item-img" class="item-img">
                     <div class="item-title">Study Beats</div>
                 </div>
                 <div class="list-item">
-                    <img src="assets/images/Study Beats.png" alt="list-img" class="list-img">
+                    <img src="assets/images/Study Beats.png" alt="item-img" class="item-img">
                     <div class="item-title">Study Beats</div>
                 </div>
             </div>
@@ -72,29 +72,35 @@
             <div class="list-title"><h2>Made for You</h2></div>
             <div class="list-items">
                 <div class="list-item-lg">
-                    <img src="assets/images/Chill Vibes.png" alt="list-img" class="list-img">
+                    <img src="assets/images/Chill Vibes.png" alt="item-img" class="item-img">
                 </div>
                 <div class="list-item-lg">
-                    <img src="assets/images/Artwork.png" alt="list-img" class="list-img">
+                    <img src="assets/images/Artwork.png" alt="item-img" class="item-img">
                 </div>
                 <div class="list-item-lg">
-                    <img src="assets/images/Chill Vibes.png" alt="list-img" class="list-img">
+                    <img src="assets/images/Chill Vibes.png" alt="item-img" class="item-img">
                 </div>
             </div>
         </div>
     </div>
     <div class="menu">
         <div class="menu__item  menu__item--active">
-            <img src="assets/icons/home.svg" alt="home" class="item__icon">
-            <div class="menu__item__title">Home</div>
+            <a href="/" class="menu__link">
+                <img src="assets/icons/home.svg" alt="home" class="item__icon">
+                <div class="menu__item__title">Home</div>
+            </a>
         </div>
         <div class="menu__item">
-            <img src="assets/icons/search.svg" alt="search" class="item__icon">
-            <div class="menu__item__title">Search</div>
+            <a href="./search.html" class="menu__link">
+                <img src="assets/icons/search.svg" alt="search" class="item__icon">
+                <div class="menu__item__title">Search</div>
+            </a>
         </div>
         <div class="menu__item">
-            <img src="assets/icons/library.svg" alt="library" class="item__icon">
-            <div class="menu__item__title">Your Library</div>
+            <a href="./" class="menu__link">
+                <img src="assets/icons/library.svg" alt="library" class="item__icon">
+                <div class="menu__item__title">Your Library</div>
+            </a>
         </div>
     </div>
     <script src="app.ts" type="module"></script>

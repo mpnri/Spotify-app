@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify | Bale</title>
+    <link rel="shortcut icon" href="assets/icons/spotify-48.svg" type="image/svg">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="search">
+        <div class="search-box">
+            <div class="search-bar">
+                <input type="text" placeholder="Search" class="search-bar__input">
+                <img src="assets/icons/search.svg" alt="search" class="search-bar__icon">
+            </div>
+            <div class="search-box__cancel">Cancel</div>
+            <div class="search-box__camera">
+                <img src="assets/icons/camera.svg" alt="camera">
+            </div>
+        </div>
+    </div>
+    <div class="search-lists">
+        <div class="search-list">
+            <div class="list-title"><h2>Recent searches</h2></div>
+            <div class="list-items">
+                <div class="list-item">
+                    <div class="item-container">
+                        <img src="assets/images/Tycho.png" alt="item-img" class="item-img circle-item">
+                        <div class="item-info">
+                            <div class="item-name">Tycho</div>
+                            <div class="item-tag">Artist</div>
+                        </div>
+                    </div>
+                    <img src="./assets/icons/close.svg" alt="close" class="item-close"></img>
+                </div>
+                <div class="list-item">
+                    <div class="item-container">
+                        <img src="assets/images/Heart in the Pipes (KAUF Remix).png" alt="item-img" class="item-img">
+                        <div class="item-info">
+                            <div class="item-name">Heart in the Pipes (KAUF Remix)</div>
+                            <div class="item-tag">Song<span class="dot"></span>Tony Castles, Kauf</div>
+                        </div>
+                    </div>
+                    <img src="./assets/icons/close.svg" alt="close" class="item-close"></img>
+                </div>
+                <div class="list-item">
+                    <div class="item-container">
+                        <img src="assets/images/Slow Posion.png" alt="item-img" class="item-img">
+                        <div class="item-info">
+                            <div class="item-name">Slow Posion</div>
+                            <div class="item-tag">Song<span class="dot"></span>The Bravery</div>
+                        </div>
+                    </div>
+                    <img src="./assets/icons/close.svg" alt="close" class="item-close"></img>
+                </div>
+                <div class="list-item">
+                    <div class="item-container">
+                        <img src="assets/images/Things I Can’t Change.png" alt="item-img" class="item-img">
+                        <div class="item-info">
+                            <div class="item-name">Things I Can’t Change</div>
+                            <div class="item-tag">Song<span class="dot"></span>The Story So Far</div>
+                        </div>
+                    </div>
+                    <img src="./assets/icons/close.svg" alt="close" class="item-close"></img>
+                </div>
+                <div class="list-item">
+                    <div class="item-container">
+                        <img src="assets/images/Sunflower (ft. Swae Lee).png" alt="item-img" class="item-img">
+                        <div class="item-info">
+                            <div class="item-name">Sunflower (ft. Swae Lee)</div>
+                            <div class="item-tag">Song<span class="dot"></span>Post Malone, Swae Lee</div>
+                        </div>
+                    </div>
+                    <img src="./assets/icons/close.svg" alt="close" class="item-close"></img>
+                </div>
+                <div class="list-item">
+                    <div class="item-container">
+                        <img src="assets/images/You.png" alt="item-img" class="item-img">
+                        <div class="item-info">
+                            <div class="item-name">You</div>
+                            <div class="item-tag">Song<span class="dot"></span>Galantis</div>
+                        </div>
+                    </div>
+                    <img src="./assets/icons/close.svg" alt="close" class="item-close"></img>
+                </div>
+            </div>
+        </div>
+        <div class="landing-list">
+            <div class="list-title"><h2>Made for You</h2></div>
+            <div class="list-items">
+                <div class="list-item-lg">
+                    <img src="assets/images/Chill Vibes.png" alt="item-img" class="item-img">
+                </div>
+                <div class="list-item-lg">
+                    <img src="assets/images/Artwork.png" alt="item-img" class="item-img">
+                </div>
+                <div class="list-item-lg">
+                    <img src="assets/images/Chill Vibes.png" alt="item-img" class="item-img">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mic">
+        <img src="assets/icons/mic.svg" alt="mic">
+    </div>
+
+    <div class="menu">
+        <div class="menu__item">
+            <a href="/" class="menu__link">
+                <img src="assets/icons/home.svg" alt="home" class="item__icon">
+                <div class="menu__item__title">Home</div>
+            </a>
+        </div>
+        <div class="menu__item  menu__item--active">
+            <a href="./search.html" class="menu__link">
+                <img src="assets/icons/search.svg" alt="search" class="item__icon">
+                <div class="menu__item__title">Search</div>
+            </a>
+        </div>
+        <div class="menu__item">
+            <a href="./" class="menu__link">
+                <img src="assets/icons/library.svg" alt="library" class="item__icon">
+                <div class="menu__item__title">Your Library</div>
+            </a>
+        </div>
+    </div>
+    <script src="app.ts" type="module"></script>
+    
+</body>
+</html>
