@@ -11,6 +11,30 @@
 </head>
 
 <body>
+    <div class="fade album-fade"></div>
+    <div class="back-icon"><img src="assets/icons/back.svg" alt="back"></div>
+    <div class="profile">
+        <div class="profile__img">
+            <img src="assets/images/Presence.png" alt="Presence">
+        </div>
+        <div class="profile-card">
+            <div class="profile-box">
+                <div class="profile-info">
+                    <div class="profile-title">Presence</div>
+                    <div class="profile-artist">
+                        <img src="assets/images/Dive.png" class="artist-img"></img>
+                        <div class="artist-title"></div>
+                    </div>
+                    <div class="profile-date"></div>
+                </div>
+                <div class="profile-options"></div>
+            </div>
+            <div class="play-btn"></div>
+        </div>
+        <div class="profile-list">
+
+        </div>
+    </div>
     <div class="tabs">
         <div class="tab tab-lg">
             <div class="tab__item tab__item--active">Music</div>
@@ -18,115 +42,96 @@
         </div>
         <div class="tab tab-sm">
             <a href="./library-artists.html"><div class="tab__item">Playlists</div></a>
-            <a href="./library-artists.html"><div class="tab__item">Artists</div></a>
-            <a href="./library-albums.html"><div class="tab__item tab__item--active">Albums</div></a>
+            <a href="./library-artists.html"><div class="tab__item tab__item--active">Artists</div></a>
+            <a href="./library-albums.html"><div class="tab__item">Albums</div></a>
         </div>
     </div>
     <div class="library-search">
         <div class="search-box">
             <div class="search-bar">
-                <input type="text" placeholder="Find in albums" class="search-bar__input">
+                <input type="text" placeholder="Find in Artists" class="search-bar__input">
                 <img src="assets/icons/search.svg" alt="search" class="search-bar__icon">
             </div>
             <div class="search-filters">Filters</div>
         </div>
     </div>
-    <div class="albums search-lists">
+    <div class="artists search-lists">
         <div class="search-list">
             <div class="list-items">
                 <div class="list-item">
                     <div class="item-container">
-                        <img src="assets/images/Dive.png" alt="item-img" class="item-img">
+                        <img src="assets/images/The Story So Far.png" alt="item-img" class="item-img circle-item">
                         <div class="item-info">
-                            <div class="item-name">Dive</div>
-                            <div class="item-tag">Tycho</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="./album.html" style="all:unset"><div class="list-item">
-                    <div class="item-container">
-                        <img src="assets/images/Presence.png" alt="item-img" class="item-img">
-                        <div class="item-info">
-                            <div class="item-name">Presence</div>
-                            <div class="item-tag">Petit Biscuit</div>
-                        </div>
-                    </div>
-                </div></a>
-                <div class="list-item">
-                    <div class="item-container">
-                        <img src="assets/images/Things I Can’t Change.png" alt="item-img" class="item-img">
-                        <div class="item-info">
-                            <div class="item-name">What You Don’t See</div>
-                            <div class="item-tag">The Story So Far</div>
+                            <div class="item-name">The Story So Far</div>
                         </div>
                     </div>
                 </div>
                 <div class="list-item">
                     <div class="item-container">
-                        <img src="assets/images/Awake.png" alt="item-img" class="item-img">
+                        <img src="assets/images/Seven Lions.png" alt="item-img" class="item-img circle-item">
                         <div class="item-info">
-                            <div class="item-name">Awake</div>
-                            <div class="item-tag">Illenium</div>
+                            <div class="item-name">Seven Lions</div>
                         </div>
                     </div>
                 </div>
                 <div class="list-item">
                     <div class="item-container">
-                        <img src="assets/images/Days To Come.png" alt="item-img" class="item-img">
+                        <img src="assets/images/Illenium.png" alt="item-img" class="item-img circle-item">
                         <div class="item-info">
-                            <div class="item-name">Days To Come</div>
-                            <div class="item-tag">Seven Lions</div>
+                            <div class="item-name">Illenium</div>
                         </div>
                     </div>
                 </div>
                 <div class="list-item">
                     <div class="item-container">
-                        <img src="assets/images/You.png" alt="item-img" class="item-img">
+                        <img src="assets/images/Galantis.png" alt="item-img" class="item-img circle-item">
                         <div class="item-info">
-                            <div class="item-name">You</div>
-                            <div class="item-tag">Galantis</div>
+                            <div class="item-name">Galantis</div>
                         </div>
                     </div>
                 </div>
                 <div class="list-item">
                     <div class="item-container">
-                        <img src="assets/images/Shapeshifter.png" alt="item-img" class="item-img">
+                        <img src="assets/images/San Holo.png" alt="item-img" class="item-img circle-item">
                         <div class="item-info">
-                            <div class="item-name">Shapeshifter</div>
-                            <div class="item-tag">Knuckle Puck</div>
+                            <div class="item-name">San Holo</div>
                         </div>
                     </div>
                 </div>
                 <div class="list-item">
                     <div class="item-container">
-                        <img src="assets/images/Awaken.png" alt="item-img" class="item-img">
+                        <img src="assets/images/MitiS.png" alt="item-img" class="item-img circle-item">
+                        <div class="item-info">
+                            <div class="item-name">MitiS</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-item">
+                    <div class="item-container">
+                        <img src="assets/images/Awaken.png" alt="item-img" class="item-img circle-item">
                         <div class="item-info">
                             <div class="item-name">Awaken</div>
-                            <div class="item-tag">Tycho</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-item">
+                    <div class="item-container">
+                        <img src="assets/images/Presence.png" alt="item-img" class="item-img circle-item">
+                        <div class="item-info">
+                            <div class="item-name">Presence</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-item">
+                    <div class="item-container">
+                        <img src="assets/images/You.png" alt="item-img" class="item-img circle-item">
+                        <div class="item-info">
+                            <div class="item-name">You</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="landing-list">
-            <div class="list-title">
-                <h2>Made for You</h2>
-            </div>
-            <div class="list-items">
-                <div class="list-item-lg">
-                    <img src="assets/images/Chill Vibes.png" alt="item-img" class="item-img">
-                </div>
-                <div class="list-item-lg">
-                    <img src="assets/images/Artwork.png" alt="item-img" class="item-img">
-                </div>
-                <div class="list-item-lg">
-                    <img src="assets/images/Chill Vibes.png" alt="item-img" class="item-img">
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="mic">
-        <img src="assets/icons/mic.svg" alt="mic">
     </div>
 
     <div class="menu">
@@ -137,12 +142,12 @@
             </a>
         </div>
         <div class="menu__item">
-            <a href="./search.html" class="menu__link">
+            <a href="./search.html" class="menu__link menu__item--active">
                 <img src="assets/icons/search.svg" alt="search" class="item__icon">
                 <div class="menu__item__title">Search</div>
             </a>
         </div>
-        <div class="menu__item menu__item--active">
+        <div class="menu__item">
             <a href="./library-albums.html" class="menu__link">
                 <img src="assets/icons/library.svg" alt="library" class="item__icon">
                 <div class="menu__item__title">Your Library</div>
