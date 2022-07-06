@@ -460,15 +460,27 @@ mic
 
 /** album start */
 
-.album-fade {
+/* .album-fade {
     width: 594px;
     height: 594px;
     filter: blur(63px);
-    z-index: 0;
+    z-index: -10;
     background: #337183;
     top: -249px;
     left: -137px;
+} */
+
+
+.album-fade {
+    width: 100vw;
+    height: 100vw;
+    filter: blur(63px);
+    z-index: -10;
+    background: #337183;
+    top: -39px;
+    left: 0;
 }
+
 
 .profile {
     width: 100%;
@@ -478,7 +490,7 @@ mic
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 3rem;
+    margin-top: 3.5rem;
 }
 
 .profile__img img {
@@ -488,43 +500,165 @@ mic
 }
 
 .profile-card {
-
+    margin-top: 1.3rem;
+    padding-inline: 1rem;
+    display: flex;
+    justify-content: space-between;
 }
 
 .profile-box {
-
+    display: flex;
+    flex-direction: column;
+    gap: .9rem;
 }
 
 .profile-info {
-
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 .profile-title {
-
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 23px;
+    letter-spacing: -0.04em;
 }
 
 .profile-artist {
-
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .artist-img {
-
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
 }
 
 .artist-title {
-
+    font-weight: 500;
+    font-size: 11.3px;
+    line-height: 14px;
 }
 
 .profile-date {
-
+    font-weight: 400;
+    font-size: 9px;
+    line-height: 11px;
+    color: var(--tag-text-color);
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
 }
 
-.profile-options {
-
+.profile-toolbar {
+    display: flex;
+    gap: 1.8rem;
 }
 
-.play-brn {
+.play-container {
+    display: flex;
+    align-items: flex-end;
+}
 
+.play-box {
+    position: relative;
+}
+
+.play-btn {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: var(--selected-item-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.play-btn img{
+    margin-inline-start: 3px;
+}
+
+.shuffle-btn {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.profile-list {
+    margin: 1.5rem 1rem;
+}
+
+.profile-list .list-items {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.profile-list .list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.profile-list .item-container {
+    display: flex;
+    gap: .8rem;
+}
+
+.profile-list .item-img {
+    width: 48px;
+    height: 48px;
+}
+
+.profile-list .item-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.1rem;
+}
+
+.profile-list .item-name {
+    font-size: 14px;
+}
+
+.profile-list .item-tag {
+    color: var(--tag-text-color);
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    line-height: 14px;
+}
+
+.profile-list .item-tag {
+    color: var(--tag-text-color);
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    line-height: 14px;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.profile-list .item-tag__icon {
+    width: 13px;
+    height: 13px;
+}
+
+.item-more {
+    width: 20px;
+    height: 20px;
+    margin-inline-end: 0.2rem;
 }
 
 /** album end */
@@ -533,5 +667,5 @@ mic
     position: absolute;
     top: 3rem;
     left: 1rem;
-    z-index: 2;
+    z-index: 10;
 }
