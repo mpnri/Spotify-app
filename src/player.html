@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify | Bale</title>
+    <link rel="shortcut icon" href="assets/icons/spotify-48.svg" type="image/svg">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="head-bar">
+        <img class="back-icon" src="assets/icons/back.svg" alt="back">
+        <div class="title">Liked Songs</div>
+        <img src="assets/icons/more.svg" alt="more" class="item-more">
+    </div>
+    <div class="player">
+        <div class="profile">
+            <img src="assets/images/Artwork.png" alt="profile-img" class="profile-img">
+            <div class="item-container">
+                <div class="item-info">
+                    <div class="item-name">Only U (Real Quick)</div>
+                    <div class="item-tag">
+                        <div class="item-tag__data">Ownglow</div>
+                    </div>
+                </div>
+                <div class="toolbar">
+                    <img src="assets/icons/liked.svg" alt="like" class="item-like">
+                </div>
+            </div>
+        </div>
+        <div class="player__controls">
+            <div class="range">
+                <input id="player-range" type="range" style="background-size: 25% 100%;" value="25" min="1" max="100" class="range-bar" />
+                <div class="times">
+                    <div class="time-passed">0:03</div>
+                    <div class="time-left">-3:49</div>
+                </div>
+            </div>
+            <div class="controls">
+                <div class="option-btn option-btn--active">
+                    <img class="option-btn-icon" src="assets/icons/shuffle.svg" alt="shuffle">
+                    <div class="dot"></div>
+                </div>
+                <div class="left-btn">
+                    <img src="assets/icons/left-btn.svg" alt="left button">
+                </div>
+                <div class="play-button play-button--active">
+                    <img src="assets/icons/stop.svg" alt="stop">
+                    <img src="assets/icons/play.svg" alt="play">
+                </div>
+                <div class="right-btn">
+                    <img src="assets/icons/right-btn.svg" alt="right button">
+                </div>
+                <div class="option-btn">
+                    <img class="option-btn-icon" src="assets/icons/repeat.svg" alt="repeat">
+                    <div class="dot"></div>
+                </div>
+            </div>
+            <div class="footer-controls">
+                <img src="assets/icons/devices.svg" alt="devices">
+                <img src="assets/icons/queue.svg" alt="queue">
+            </div>
+        </div>
+    </div>
+    <div class="menu-placeholder"></div>
+    <div class="menu">
+        <div class="menu__item">
+            <a href="/" class="menu__link">
+                <img src="assets/icons/home.svg" alt="home" class="item__icon">
+                <div class="menu__item__title">Home</div>
+            </a>
+        </div>
+        <div class="menu__item">
+            <a href="./search.html" class="menu__link">
+                <img src="assets/icons/search.svg" alt="search" class="item__icon">
+                <div class="menu__item__title">Search</div>
+            </a>
+        </div>
+        <div class="menu__item">
+            <a href="./library-albums.html" class="menu__link menu__item--active">
+                <img src="assets/icons/library.svg" alt="library" class="item__icon">
+                <div class="menu__item__title">Your Library</div>
+            </a>
+        </div>
+    </div>
+    <script src="app.ts" type="module"></script>
+
+</body>
+
+</html>
