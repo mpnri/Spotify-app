@@ -2,6 +2,8 @@ import Library from "./pages/Library/";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Album from "./pages/Library/Album";
+import LikedSongs from "./pages/Library/LikedSongs";
+import Play from "./pages/Play";
 
 const App = document.getElementById('app')!;
 const routes = {
@@ -11,7 +13,9 @@ const routes = {
     '/library/albums': Library('albums'),
     '/library/artists': Library('artists'),
     '/library/playlists': Library('playlists'),
-    '/library/album/:id': Album
+    '/library/album/:id': Album,
+    '/library/liked-songs': LikedSongs,
+    '/play/:id': Play
 };
 
 function processRoutes() {

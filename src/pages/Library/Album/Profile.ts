@@ -8,7 +8,7 @@ import shuffle from '../../../assets/icons/shuffle.svg';
 
 const ProfileListItem = (music: MusicType) => `
     <div class="list-item">
-        <a href="/songs/${music.id}">
+        <a href="/play/${music.id}">
             <div class="item-container">
                 <div class="item-info">
                     <div class="item-name">${music.track_name}</div>

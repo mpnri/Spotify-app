@@ -11,142 +11,61 @@
 </head>
 
 <body>
-    <div class="fade album-fade"></div>
-    <div class="back-icon"><img src="assets/icons/back.svg" alt="back"></div>
-    <div class="profile">
-        <div class="profile__img">
-            <img src="assets/images/Presence.png    " alt="Presence">
-        </div>
-        <div class="profile-card">
-            <div class="profile-box">
-                <div class="profile-info">
-                    <div class="profile-title">Presence</div>
-                    <div class="profile-artist">
-                        <img src="assets/images/Dive.png" class="artist-img"></img>
-                        <div class="artist-title">Petit Biscuit</div>
-                    </div>
-                    <div class="profile-date">
-                        Album<span class="dot"></span>2017
+    <div class="head-bar">
+        <img class="back-icon" src="assets/icons/back.svg" alt="back">
+        <div class="title">Liked Songs</div>
+        <img src="assets/icons/more.svg" alt="more" class="item-more">
+    </div>
+    <div class="player">
+        <div class="profile">
+            <img src="assets/images/Artwork.png" alt="profile-img" class="profile-img">
+            <div class="item-container">
+                <div class="item-info">
+                    <div class="item-name">Only U (Real Quick)</div>
+                    <div class="item-tag">
+                        <div class="item-tag__data">Ownglow</div>
                     </div>
                 </div>
-                <div class="profile-toolbar">
-                    <img src="assets/icons/like.svg" alt="like" class="profile-like"/>
-                    <img src="assets/icons/download.svg" alt="download" class="profile-download"/>
-                    <img src="assets/icons/more.svg" alt="more" class="profile-more"/>
-                </div>
-            </div>
-            <div class="play-container">
-                <div class="play-box">
-                    <div class="play-btn">
-                        <img src="assets/icons/play.svg" alt="play">
-                    </div>
-                    <div class="shuffle-btn">
-                        <img src="assets/icons/shuffle.svg" alt="shuffle">
-                    </div>
+                <div class="toolbar">
+                    <img src="assets/icons/liked.svg" alt="like" class="item-like">
                 </div>
             </div>
         </div>
-        <div class="profile-list">
-            <div class="list-items">
-                <div class="list-item">
-                    <div class="item-container">
-                        <div class="item-info">
-                            <div class="item-name">Creation Comes Alive</div>
-                            <div class="item-tag">
-                                <img class="item-tag__icon" src="assets/icons/download.svg" alt="download">
-                                <div class="item-tag__data">Petit Biscuit, SONIA</div>
-                            </div>
-                        </div>
-                    </div>
-                    <img src="assets/icons/more.svg" alt="more" class="item-more">
+        <div class="player__controls">
+            <div class="range">
+                <input id="player-range" type="range" style="background-size: 25% 100%;" value="25" min="1" max="100" class="range-bar" />
+                <div class="times">
+                    <div class="time-passed">0:03</div>
+                    <div class="time-left">-3:49</div>
                 </div>
-                <div class="list-item">
-                    <div class="item-container">
-                        <div class="item-info">
-                            <div class="item-name">Problems</div>
-                            <div class="item-tag">
-                                <img class="item-tag__icon" src="assets/icons/download.svg" alt="download">
-                                <div class="item-tag__data">Petit Biscuit, Lido</div>
-                            </div>
-                        </div>
-                    </div>
-                    <img src="assets/icons/more.svg" alt="more" class="item-more">
+            </div>
+            <div class="controls">
+                <div class="option-btn option-btn--active">
+                    <img class="option-btn-icon" src="assets/icons/shuffle.svg" alt="shuffle">
+                    <div class="dot"></div>
                 </div>
-                <div class="list-item">
-                    <div class="item-container">
-                        <div class="item-info">
-                            <div class="item-name">Follow Me</div>
-                            <div class="item-tag">
-                                <img class="item-tag__icon" src="assets/icons/download.svg" alt="download">
-                                <div class="item-tag__data">Petit Biscuit,</div>
-                            </div>
-                        </div>
-                    </div>
-                    <img src="assets/icons/more.svg" alt="more" class="item-more">
+                <div class="left-btn">
+                    <img src="assets/icons/left-btn.svg" alt="left button">
                 </div>
-                <div class="list-item">
-                    <div class="item-container">
-                        <div class="item-info">
-                            <div class="item-name">Beam</div>
-                            <div class="item-tag">
-                                <img class="item-tag__icon" src="assets/icons/download.svg" alt="download">
-                                <div class="item-tag__data">Petit Biscuit</div>
-                            </div>
-                        </div>
-                    </div>
-                    <img src="assets/icons/more.svg" alt="more" class="item-more">
+                <div class="play-button play-button--active">
+                    <img src="assets/icons/stop.svg" alt="stop">
+                    <img src="assets/icons/play.svg" alt="play">
                 </div>
-                <div class="list-item">
-                    <div class="item-container">
-                        <div class="item-info">
-                            <div class="item-name">Break Up</div>
-                            <div class="item-tag">
-                                <img class="item-tag__icon" src="assets/icons/download.svg" alt="download">
-                                <div class="item-tag__data">Petit Biscuit</div>
-                            </div>
-                        </div>
-                    </div>
-                    <img src="assets/icons/more.svg" alt="more" class="item-more">
+                <div class="right-btn">
+                    <img src="assets/icons/right-btn.svg" alt="right button">
                 </div>
-                <div class="list-item">
-                    <div class="item-container">
-                        <div class="item-info">
-                            <div class="item-name">Creation Comes Alive</div>
-                            <div class="item-tag">
-                                <img class="item-tag__icon" src="assets/icons/download.svg" alt="download">
-                                <div class="item-tag__data">Petit Biscuit, SONIA</div>
-                            </div>
-                        </div>
-                    </div>
-                    <img src="assets/icons/more.svg" alt="more" class="item-more">
+                <div class="option-btn">
+                    <img class="option-btn-icon" src="assets/icons/repeat.svg" alt="repeat">
+                    <div class="dot"></div>
                 </div>
-                <div class="list-item">
-                    <div class="item-container">
-                        <div class="item-info">
-                            <div class="item-name">Creation Comes Alive</div>
-                            <div class="item-tag">
-                                <img class="item-tag__icon" src="assets/icons/download.svg" alt="download">
-                                <div class="item-tag__data">Petit Biscuit, SONIA</div>
-                            </div>
-                        </div>
-                    </div>
-                    <img src="assets/icons/more.svg" alt="more" class="item-more">
-                </div>
-                <div class="list-item">
-                    <div class="item-container">
-                        <div class="item-info">
-                            <div class="item-name">Creation Comes Alive</div>
-                            <div class="item-tag">
-                                <img class="item-tag__icon" src="assets/icons/download.svg" alt="download">
-                                <div class="item-tag__data">Petit Biscuit, SONIA</div>
-                            </div>
-                        </div>
-                    </div>
-                    <img src="assets/icons/more.svg" alt="more" class="item-more">
-                </div>
+            </div>
+            <div class="footer-controls">
+                <img src="assets/icons/devices.svg" alt="devices">
+                <img src="assets/icons/queue.svg" alt="queue">
             </div>
         </div>
     </div>
+
 
 </body>
 
