@@ -2,7 +2,7 @@ import home from '../assets/icons/home.svg';
 import search from '../assets/icons/search.svg';
 import library from '../assets/icons/library.svg';
 
-const Menu = (activeLink: string) => {
+const Menu = (activeLink: 'home' | 'search' | 'library') => {
     return `
     <div class="menu-placeholder"></div>
     <div class="menu">
