@@ -289,9 +289,14 @@ body::before {
     justify-content: space-between;
 }
 
+.list-item > a {
+    all: unset;
+}
+
 .search-list .item-container {
     display: flex;
     gap: .8rem;
+    width: 100%;
 }
 
 .search-list .item-img {

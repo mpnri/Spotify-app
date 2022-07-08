@@ -16,4 +16,6 @@ export type AlbumType = {
     "album_url": string;
 }
 
+export type TabType = 'albums' | 'artists' | 'playlists';
+
 export type DataType = { album: AlbumType, musics: MusicType[], length: number };
