@@ -7,6 +7,43 @@ import Play, {playLogic} from "./pages/Play";
 
 import data from './data/data.json';
 
+
+const database = indexedDB.open('data',1);
+
+database.addEventListener('upgradeneeded', e => {
+    const db = database.result;
+    switch(e.oldVersion) {
+        case 0:
+            const store = db.createObjectStore('albums', {
+                keyPath: 'id'
+            });
+            data.forEach(item => {
+                item.musics.forEach(elm => {
+                    elm.is_liked = false;
+                    elm.is_searched = false;
+                    elm.is_downloaded = false;
+                    elm.is_played = false;
+                })
+                item.album['is_searched'] =false;
+                item['id'] = item.album.id;
+                store.add(item);
+            });
+            
+    }
+
+    
+    processRoutes();
+    handleRouteChange();
+})
+
+database.onsuccess = () => {
+    console.log('access database successful');
+    processRoutes();
+    handleRouteChange();
+}
+
+
+
 const App = document.getElementById('app')!;
 const routes = {
     '/': {run: Home, logic: ()=>{}},
@@ -76,36 +113,6 @@ function handleRouteChange() {
     window.addEventListener('popstate', processRoutes);
 }
 
-processRoutes();
-handleRouteChange();
 
-
-const database = indexedDB.open('data',1);
-
-database.addEventListener('upgradeneeded', e => {
-    const db = database.result;
-    switch(e.oldVersion) {
-        case 0:
-            const store = db.createObjectStore('albums', {
-                keyPath: 'id'
-            });
-            data.forEach(item => {
-                item.musics.forEach(elm => {
-                    elm.is_liked = false;
-                    elm.is_searched = false;
-                    elm.is_downloaded = false;
-                    elm.is_played = false;
-                })
-                item.album['is_searched'] =false;
-                item['id'] = item.album.id;
-                store.add(item);
-            });
-            
-    }
-})
-
-database.onsuccess = () => {
-    console.log('access database successful');
-}
 
 
