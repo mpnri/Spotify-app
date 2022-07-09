@@ -1,10 +1,8 @@
 import Menu from "../../components/Menu";
 import Mic from "../../components/Mic";
-import { AlbumType } from "../../types";
+import { AlbumType, DataType } from "../../types";
 import Search from "./Search";
 import TabBox from "./TabBox";
-
-import data from '../../data/data.json';
 
 const AlbumsItem = (album : AlbumType) => `
     <a href="./album/${album.id}/" style="all:unset">
@@ -20,7 +18,7 @@ const AlbumsItem = (album : AlbumType) => `
     </a>
 `;
 
-const Albums = () => {
+const Albums = (data : DataType[]) => {
     return (''
         + '<div class="tabs">'
             +  `<div class="tab tab-lg">

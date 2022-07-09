@@ -912,6 +912,10 @@ mic
     gap: 1rem;
 }
 
+.player__controls a{
+    all: unset;
+}
+
 .range {
     vertical-align: baseline;
 }

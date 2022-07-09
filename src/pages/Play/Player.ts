@@ -22,14 +22,14 @@ const Profile = (music : MusicType) => `
                 </div>
             </div>
             <div class="toolbar">
-                <img src="${like}" alt="like" class="item-like">
+                <img src="${music.is_liked ? liked:like}" alt="like" class="item-like">
             </div>
         </div>
     </div>
 `;
 
 
-const PlayerControls = (music : MusicType) => `
+const PlayerControls = (music : MusicType, prevMusic : MusicType, nextMusic : MusicType) => `
     <div class="player__controls">
         <div class="range">
             <input id="player-range" type="range" style="background-size: 0% 100%;" value="0" min="0" max="100" class="range-bar" />
@@ -46,16 +46,20 @@ const PlayerControls = (music : MusicType) => `
                 <img class="option-btn-icon" src="${shuffle}" alt="shuffle">
                 <div class="dot"></div>
             </div>
-            <div class="left-btn">
-                <img src="${leftBtn}" alt="left button">
-            </div>
+            <a href="/play/${prevMusic.id}">
+                <div class="left-btn">
+                    <img src="${leftBtn}" alt="left button">
+                </div>
+            </a>
             <div class="play-button play-button--active">
                 <img src="${stop}" alt="stop">
                 <img src="${play}" alt="play">
             </div>
-            <div class="right-btn">
-                <img src="${rightBtn}" alt="right button">
-            </div>
+            <a href="/play/${nextMusic.id}">
+                <div class="right-btn">
+                    <img src="${rightBtn}" alt="right button">
+                </div>
+            </a>
             <div class="option-btn">
                 <img class="option-btn-icon" src="${repeat}" alt="repeat">
                 <div class="dot"></div>
@@ -68,10 +72,10 @@ const PlayerControls = (music : MusicType) => `
     </div>
 `;
 
-const Player = (music : MusicType) => `
+const Player = (music : MusicType, prevMusic : MusicType, nextMusic : MusicType) => `
     <div class="player">
         ${Profile(music)}
-        ${PlayerControls(music)}
+        ${PlayerControls(music, prevMusic, nextMusic)}
     </div>
 `;
 

@@ -4,7 +4,8 @@ import Search from "./Search";
 import TabBox from "./TabBox";
 
 import liked from '../../assets/icons/liked.svg';
-//import data from '../../data/data.json';
+import { DataType } from "../../types";
+
 
 const PlaylistsItem = () => `
     <a href="/library/liked-songs" style="all:unset">
@@ -17,7 +18,7 @@ const PlaylistsItem = () => `
     </a>
 `;
 
-const Playlists = () => {
+const Playlists = (data : DataType[]) => {
     return (''
         + '<div class="tabs">'
             +  `<div class="tab tab-lg">

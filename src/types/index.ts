@@ -4,7 +4,10 @@ export type MusicType = {
     "track_time": string;
     "track_url": string;
     "track_thumb": string;
-    "is_liked": boolean | undefined;
+    "is_liked": boolean;
+    "is_searched": boolean;
+    "is_downloaded": boolean;
+    "is_played": boolean
 }
 
 export type AlbumType = {
@@ -14,8 +17,9 @@ export type AlbumType = {
     "album_genre": string;
     "album_thumb": string;
     "album_url": string;
+    "is_searched": boolean;
 }
 
 export type TabType = 'albums' | 'artists' | 'playlists';
 
-export type DataType = { album: AlbumType, musics: MusicType[], length: number };
+export type DataType = { album: AlbumType, musics: MusicType[], length: number, id: string };

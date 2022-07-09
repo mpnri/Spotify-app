@@ -1,30 +1,48 @@
 import Menu from "../../components/Menu";
 import back from '../../assets/icons/back.svg';
 import more from '../../assets/icons/more.svg';
+import like from '../../assets/icons/like.svg';
+import liked from '../../assets/icons/liked.svg';
 
-import data from '../../data/data.json';
-import { DataType, MusicType } from "../../types";
+import { AlbumType, DataType, MusicType } from "../../types";
 import Player from "./Player";
 
-const Play = ({ id }: { id: number }) => {
-
-    const music = data.reduce((prev, elm: any) => {
-        const curr = [...prev, ...elm.musics]
-        return curr;
-    }, [] as MusicType[]).find(elm => +elm.id === +id) as MusicType;
-
+const Play = (item: DataType, id: string) => {
+    const musicList = item.musics;
+    const musicInd = musicList.findIndex((item: MusicType) => +item.id === +id);
+    const music = musicList[musicInd] as any;
+    const prevMusic = musicList[(musicInd - 1 + musicList.length) % musicList.length] as any;
+    const nextMusic = musicList[(musicInd + 1) % musicList.length] as any;
     return (`
         <div class="head-bar">
             <img class="back-icon" src="${back}" alt="back">
             <div class="title">Liked Songs</div>
             <img src="${more}" alt="more" class="item-more">
         </div>
-        ${Player(music)}
+        ${Player(music, prevMusic, nextMusic)}
         ${Menu('library')}
     `);
 };
 
-export const playLogic = () => {
+const PlayAux = ({ id }: { id: string }) => {
+    return new Promise<string>((resolve, reject) => {
+        const database = indexedDB.open('data', 1);
+        database.addEventListener('success', e => {
+            const db = database.result;
+            const transaction = db.transaction('albums', "readonly");
+            const store = transaction.objectStore('albums');
+            const albums = store.getAll();
+            albums.addEventListener('success', e => {
+                resolve(
+                    Play(albums.result.find(item =>item.musics.find(elm => +elm.id === +id)), id)
+                );
+            })
+        });
+    })
+}
+
+
+export const playLogic = ({id} : {id:string}) => {
     const player = document.getElementById('player') as HTMLAudioElement;
     const playerRange = document.getElementById('player-range') as HTMLInputElement;
     const timePassed = document.querySelector('.time-passed') as HTMLDivElement;
@@ -32,31 +50,31 @@ export const playLogic = () => {
     const playBtn = document.querySelector('.play-button') as HTMLDivElement;
     let timer = -1;
     const handleRange = () => {
-        console.log(player.currentTime);
-        
+        //* console.log(player.currentTime);
+
         const time = +(player.currentTime || 0).toFixed(0);
         const seekPosition = time * (100 / player.duration);
-        
+
         playerRange.value = (seekPosition || 0) + '';
         playerRange.style.backgroundSize = playerRange.value + '% 100%';
-        
-        
-        timePassed.textContent = (time/60).toFixed(0) + ':' + (time%60>9 ? '':'0')+time%60;
-        const left = +( (player.duration || 0) - time).toFixed(0)
-        timeLeft.textContent = (left/60).toFixed(0) + ':' + (left%60>9 ? '':'0')+left%60;
+
+
+        timePassed.textContent = (time / 60).toFixed(0) + ':' + (time % 60 > 9 ? '' : '0') + time % 60;
+        const left = +((player.duration || 0) - time).toFixed(0)
+        timeLeft.textContent = (left / 60).toFixed(0) + ':' + (left % 60 > 9 ? '' : '0') + left % 60;
         //console.log(time , player.duration || 0);
-        
+
 
         if (player.currentTime === player.duration) {
             console.log('test');
-            
+
             playBtn.dispatchEvent(new Event('click'));
             // console.log(timer);
-            
+
             // clearInterval(timer);
             // player.pause();
             //playBtn.classList.toggle('play-button--active');
-            
+
         }
     }
     handleRange();
@@ -66,18 +84,18 @@ export const playLogic = () => {
             player.currentTime = player.duration * (+playerRange.value / 100);
             handleRange();
         })
-        
-        
-        
+
+
+
         player.play();
-        
+
         //if (timer < 0)
-            timer = setInterval(handleRange, 100);
+        timer = setInterval(handleRange, 100);
         console.log(timer);
-        
+
         playBtn.addEventListener('click', e => {
             console.log(timer, playBtn.classList.contains('play-button--active'));
-            
+
             if (playBtn.classList.contains('play-button--active')) {
                 player.pause();
                 clearInterval(timer);
@@ -88,11 +106,35 @@ export const playLogic = () => {
             }
             playBtn.classList.toggle('play-button--active');
         });
-        window.addEventListener('popstate', e=> {
+        window.addEventListener('popstate', e => {
             clearInterval(timer);
         })
     })
-    
+
+
+
+    //* other options
+    const likeBtn = document.querySelector('.player .item-like') as HTMLImageElement;
+    const database = indexedDB.open('data', 1);
+    database.addEventListener('success', e => {
+        const db = database.result;
+        likeBtn.addEventListener('click', e => {
+            const transaction = db.transaction('albums', "readwrite");
+            const store = transaction.objectStore('albums');
+            const albums = store.getAll();
+            albums.addEventListener('success', e => {
+                const data = albums.result.find(item => item.musics.find(elm => +elm.id === +id)) as DataType;
+                const music = data.musics.find(music => +music.id === +id) as MusicType;
+                music.is_liked = !music.is_liked;
+                console.log(data.musics.find(music => +music.id === +id));
+                store.put(data);
+                likeBtn.src = music.is_liked ? liked : like;
+            })
+        });
+    });
+
+
+
 }
 
-export default Play;
+export default PlayAux;

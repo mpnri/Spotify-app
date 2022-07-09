@@ -4,7 +4,6 @@ import { AlbumType, DataType } from "../../types";
 import Search from "./Search";
 import TabBox from "./TabBox";
 
-import data from '../../data/data.json';
 
 const ArtistsItem = (album : AlbumType) => `
     <!--<a href="./albums/${album.id}/" style="all:unset">-->
@@ -19,7 +18,7 @@ const ArtistsItem = (album : AlbumType) => `
     <!--</a>-->
 `;
 
-const Artists = () => {
+const Artists = (data : DataType[]) => {
     return (''
         + '<div class="tabs">'
             +  `<div class="tab tab-lg">

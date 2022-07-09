@@ -5,6 +5,8 @@ import Album from "./pages/Library/Album";
 import LikedSongs from "./pages/Library/LikedSongs";
 import Play, {playLogic} from "./pages/Play";
 
+import data from './data/data.json';
+
 const App = document.getElementById('app')!;
 const routes = {
     '/': {run: Home, logic: ()=>{}},
@@ -18,10 +20,11 @@ const routes = {
     '/play/:id': {run: Play, logic: playLogic}
 };
 
-function processRoutes() {
+async function processRoutes() {
     const currentRoute = window.location.pathname;
+    
     if (routes.hasOwnProperty(currentRoute))
-        App.innerHTML = routes[currentRoute].run();
+        App.innerHTML = await routes[currentRoute].run();
     else
     {
         const pathList = location.pathname.split('/').filter(item => item);
@@ -40,7 +43,7 @@ function processRoutes() {
             });
         })
         if (route) {
-            App.innerHTML = routes[route].run(pathData);
+            App.innerHTML = await routes[route].run(pathData);
             routes[route].logic(pathData);
         } else {
             App.innerHTML = `<h1 style="text-align:center;">404 not found</h1>`
@@ -75,3 +78,34 @@ function handleRouteChange() {
 
 processRoutes();
 handleRouteChange();
+
+
+const database = indexedDB.open('data',1);
+
+database.addEventListener('upgradeneeded', e => {
+    const db = database.result;
+    switch(e.oldVersion) {
+        case 0:
+            const store = db.createObjectStore('albums', {
+                keyPath: 'id'
+            });
+            data.forEach(item => {
+                item.musics.forEach(elm => {
+                    elm.is_liked = false;
+                    elm.is_searched = false;
+                    elm.is_downloaded = false;
+                    elm.is_played = false;
+                })
+                item.album['is_searched'] =false;
+                item['id'] = item.album.id;
+                store.add(item);
+            });
+            
+    }
+})
+
+database.onsuccess = () => {
+    console.log('access database successful');
+}
+
+
