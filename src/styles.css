@@ -291,6 +291,7 @@ body::before {
 
 .list-item > a {
     all: unset;
+    width: 100%;
 }
 
 .search-list .item-container {
@@ -961,6 +962,8 @@ mic
     line-height: 14px;
 
 }
+
+
 
 .player__controls .controls {
     display: flex;

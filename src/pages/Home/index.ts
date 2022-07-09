@@ -1,4 +1,4 @@
-import Menu from "../../components/menu";
+import Menu from "../../components/Menu";
 import Toolbar from "./Toolbar";
 
 import data from '../../data/data.json';

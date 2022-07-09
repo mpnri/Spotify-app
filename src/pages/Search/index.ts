@@ -1,5 +1,5 @@
-import Menu from "../../components/menu";
-import Mic from "../../components/mic";
+import Menu from "../../components/Menu";
+import Mic from "../../components/Mic";
 import SearchBox from "./SearchBox";
 
 import data from '../../data/data.json';

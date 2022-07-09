@@ -32,12 +32,15 @@ const Profile = (music : MusicType) => `
 const PlayerControls = (music : MusicType) => `
     <div class="player__controls">
         <div class="range">
-            <input id="player-range" type="range" style="background-size: 25% 100%;" value="25" min="1" max="100" class="range-bar" />
+            <input id="player-range" type="range" style="background-size: 0% 100%;" value="0" min="0" max="100" class="range-bar" />
             <div class="times">
                 <div class="time-passed">0:03</div>
                 <div class="time-left">-3:49</div>
             </div>
         </div>
+        <audio id="player">
+            <source src="${music.track_url}" type="audio/mp3">
+        </audio>
         <div class="controls">
             <div class="option-btn option-btn--active">
                 <img class="option-btn-icon" src="${shuffle}" alt="shuffle">

@@ -3,25 +3,25 @@ import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Album from "./pages/Library/Album";
 import LikedSongs from "./pages/Library/LikedSongs";
-import Play from "./pages/Play";
+import Play, {playLogic} from "./pages/Play";
 
 const App = document.getElementById('app')!;
 const routes = {
-    '/': Home,
-    '/search': Search,
-    '/library': Library('albums'),
-    '/library/albums': Library('albums'),
-    '/library/artists': Library('artists'),
-    '/library/playlists': Library('playlists'),
-    '/library/album/:id': Album,
-    '/library/liked-songs': LikedSongs,
-    '/play/:id': Play
+    '/': {run: Home, logic: ()=>{}},
+    '/search': {run: Search, logic: ()=>{}},
+    '/library': {run: Library('albums'), logic: ()=>{}},
+    '/library/albums': {run: Library('albums'), logic: ()=>{}},
+    '/library/artists': {run: Library('artists'), logic: ()=>{}},
+    '/library/playlists': {run: Library('playlists'), logic: ()=>{}},
+    '/library/album/:id': {run: Album, logic: ()=>{}},
+    '/library/liked-songs': {run: LikedSongs, logic: ()=>{}},
+    '/play/:id': {run: Play, logic: playLogic}
 };
 
 function processRoutes() {
     const currentRoute = window.location.pathname;
     if (routes.hasOwnProperty(currentRoute))
-        App.innerHTML = routes[currentRoute]();
+        App.innerHTML = routes[currentRoute].run();
     else
     {
         const pathList = location.pathname.split('/').filter(item => item);
@@ -40,7 +40,8 @@ function processRoutes() {
             });
         })
         if (route) {
-            App.innerHTML = routes[route](pathData);
+            App.innerHTML = routes[route].run(pathData);
+            routes[route].logic(pathData);
         } else {
             App.innerHTML = `<h1 style="text-align:center;">404 not found</h1>`
         }
@@ -50,6 +51,9 @@ function processRoutes() {
     
     // App.innerHTML = routes['/']();
     handleLinks();
+    document.querySelector('.back-icon')?.addEventListener('click', e => {
+        history.back();
+    })
 }
 
 function handleLinks() {
