@@ -1,4 +1,4 @@
-import Aux from '../../components/Aux';
+import Aux from '../../components/AuxElm';
 import Albums from './Albums';
 import Artists from './Artists';
 import Playlists from './PlayLists';

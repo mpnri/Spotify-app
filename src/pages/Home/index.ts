@@ -3,7 +3,7 @@ import Toolbar from "./Toolbar";
 
 import LandingListLg from "./Landing-list-lg";
 import { DataType } from "../../types";
-import Aux from "../../components/Aux";
+import Aux from "../../components/AuxElm";
 
 
 const Fade = () => `<div class="fade home-fade"></div>`;

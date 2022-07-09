@@ -4,7 +4,7 @@ import back from '../../../assets/icons/back.svg';
 import Profile from "./Profile";
 
 import { DataType } from "../../../types";
-import Aux from "../../../components/Aux";
+import Aux from "../../../components/AuxElm";
 
 
 const LikedSongs = (data : DataType[]) => `
