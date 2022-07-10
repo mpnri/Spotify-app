@@ -6,13 +6,13 @@ import liked from '../../../assets/icons/liked.svg';
 
 import Profile from "./Profile";
 import { DataType, MusicType } from "../../../types";
-import { modifyMusic } from "../../../handlers";
+import { actionSettings, getAlbums, modifyMusic } from "../../../handlers";
 
-const Album = (item : DataType) => {
+const Album = (item : DataType, settings) => {
     return (''
         + '<div class="fade album-fade"></div>'
         + `<div class="back-icon"><img src="${back}" alt="back"></div>`
-        + Profile(item)
+        + Profile(item, settings)
         + Menu('search')
     );
 };
@@ -26,7 +26,9 @@ const AlbumAux = ({ id }: { id: string }) => {
             const store = transaction.objectStore('albums');
             const album = store.get(id);
             album.addEventListener('success', e => {
-                resolve(Album(album.result))
+                actionSettings('player', settings => {
+                    resolve(Album(album.result, settings))
+                }, 'readonly')
             })
         });
     })
@@ -61,6 +63,33 @@ export const albumLogic = ({ id }: { id: string }) => {
             })
         });
     });
+
+    const playBtn = document.querySelector('.play-box > .play-btn') as HTMLDivElement;
+    playBtn.addEventListener('click', e => {
+        actionSettings('player', ({is_shuffle}) => {
+            getAlbums((data:DataType[]) => {
+                const album = data.find(item => +item.id === +id)!
+                let nextInd = 0;                        
+                if (is_shuffle) {
+                    while (nextInd === 0)
+                        nextInd = ~~(Math.random() * album.musics.length);
+                }
+                history.pushState({},'', `/play/${album.musics[nextInd].id}`);
+                window['router']();
+            })
+        }, 'readonly');
+    });
+    const shuffleBtn = document.querySelector('.play-box > .shuffle-btn') as HTMLDivElement;
+    shuffleBtn.addEventListener('click', e => {
+        actionSettings('player', (settings) => {
+            if (shuffleBtn.classList.contains('shuffle-btn--active'))
+                settings.is_shuffle = false;
+            else
+                settings.is_shuffle = true;
+            shuffleBtn.classList.toggle('shuffle-btn--active')
+        }, 'readwrite');
+    });
+
 }
 
 export default AlbumAux;

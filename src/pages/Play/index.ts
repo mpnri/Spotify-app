@@ -6,7 +6,8 @@ import liked from '../../assets/icons/liked.svg';
 
 import { DataType, MusicType } from "../../types";
 import Player from "./Player";
-import { actionSettings, modifyMusic } from "../../handlers";
+import { actionSettings, getAlbums, modifyMusic } from "../../handlers";
+import Albums from "../Library/Albums";
 
 const Play = (item: DataType, id: string, settings) => {
     const musicList = item.musics;
@@ -76,17 +77,25 @@ const playerLogic = ({ id }: { id: string; }) => {
             console.log('test');
 
             playBtn.dispatchEvent(new Event('click'));
-            actionSettings('player', (settings : {is_repeat:boolean;is_shuffled:boolean;}) => {
+            actionSettings('player', (settings : {is_repeat:boolean;is_shuffle:boolean;}) => {
                 if (settings.is_repeat)
                     setTimeout(() => {
                         playBtn.dispatchEvent(new Event('click'));
                     }, 500);
                 else {
-                    if (settings.is_shuffled) {
-
-                    } else {
-                        // todo: use handler? -> action album?
-                    }
+                    getAlbums((data:DataType[]) => {
+                        const album = data.find(item => item.musics.find(elm => +elm.id === +id))!
+                        const musicInd = album.musics.findIndex(elm => +elm.id === +id);
+                        let nextInd = musicInd;                        
+                        if (settings.is_shuffle) {                            
+                            while (musicInd === nextInd)
+                                nextInd = ~~(Math.random() * album.musics.length);
+                        } else {
+                            nextInd = (musicInd + 1) % album.musics.length;    
+                        }
+                        history.pushState({},'', `/play/${album.musics[nextInd].id}`);
+                        window['router']();
+                    })
                 }
             }, 'readonly')
             // const time = ~~player.duration;
@@ -130,7 +139,7 @@ const playerLogic = ({ id }: { id: string; }) => {
             //! clear load method?
             clearInterval(timer);
             player.pause();
-            player.src = '';
+            //player.removeEventListener();
         })
     })
 

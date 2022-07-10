@@ -620,6 +620,16 @@ mic
     position: absolute;
     right: 0;
     bottom: 0;
+    
+}
+
+.shuffle-btn--active {
+    background-color: var(--selected-item-color);
+    box-shadow: 0px -0.01px 0px 0.6px #000;
+}
+
+.shuffle-btn--active img{
+    filter: invert(0%) sepia(260%) saturate(2%) hue-rotate(327deg) brightness(150%) contrast(101%);
 }
 
 .profile-list {

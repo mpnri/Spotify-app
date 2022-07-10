@@ -34,7 +34,7 @@ const ProfileList = (musics : MusicType[]) => `
     </div>
 `;
 
-const ProfileCard = (item : DataType) => `
+const ProfileCard = (item : DataType, {is_shuffle}) => `
     <div class="profile-card">
         <div class="profile-box">
             <div class="profile-info">
@@ -58,7 +58,7 @@ const ProfileCard = (item : DataType) => `
                 <div class="play-btn">
                     <img src="${play}" alt="play">
                 </div>
-                <div class="shuffle-btn">
+                <div class="shuffle-btn${is_shuffle ? ' shuffle-btn--active':''}">
                     <img src="${shuffle}" alt="shuffle">
                 </div>
             </div>
@@ -66,12 +66,12 @@ const ProfileCard = (item : DataType) => `
     </div>
 `;
 
-const Profile = (item : DataType) => `
+const Profile = (item : DataType, settings) => `
     <div class="profile">
         <div class="profile__img">
             <img src="${item.album.album_thumb} " alt="Presence">
         </div>
-        ${ProfileCard(item)}
+        ${ProfileCard(item, settings)}
         ${ProfileList(item.musics)}
     </div>
 `;

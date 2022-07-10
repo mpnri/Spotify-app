@@ -32,3 +32,32 @@ export const actionSettings = (name : string, modify : Function, action: 'readwr
     });
 }
 
+export const actionAlbum = (id : string, modify : Function, action: 'readwrite' | 'readonly' = 'readwrite') => {
+    const database = indexedDB.open('data', 1);
+    database.addEventListener('success', e => {
+        const db = database.result;
+        const transaction = db.transaction('albums', action);
+        const store = transaction.objectStore('albums');
+        const album = store.get(id);
+        album.addEventListener('success', e => {
+            const res = album.result;
+            modify(res);
+            if (action === 'readwrite')
+                store.put(res);
+        })
+    });
+}
+
+export const getAlbums = (modify : Function) => {
+    const database = indexedDB.open('data', 1);
+    database.addEventListener('success', e => {
+        const db = database.result;
+        const transaction = db.transaction('albums', 'readonly');
+        const store = transaction.objectStore('albums');
+        const albums = store.getAll();
+        albums.addEventListener('success', e => {
+            const res = albums.result;
+            modify(res);
+        })
+    });
+}

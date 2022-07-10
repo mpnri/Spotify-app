@@ -103,6 +103,8 @@ async function processRoutes() {
     })
 }
 
+window['router'] = processRoutes;
+
 function handleLinks() {
     document.querySelectorAll('a').forEach(link =>
             link.addEventListener('click', e => {
