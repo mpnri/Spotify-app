@@ -9,12 +9,7 @@ import Player from "./Player";
 import { actionSettings, getAlbums, modifyMusic } from "../../handlers";
 import Albums from "../Library/Albums";
 
-const Play = (item: DataType, id: string, settings) => {
-    const musicList = item.musics;
-    const musicInd = musicList.findIndex((item: MusicType) => +item.id === +id);
-    const music = musicList[musicInd] as any;
-    const prevMusic = musicList[(musicInd - 1 + musicList.length) % musicList.length] as any;
-    const nextMusic = musicList[(musicInd + 1) % musicList.length] as any;
+const Play = (music: MusicType, prevMusic: number, nextMusic: number, settings) => {
     return (`
         <div class="head-bar">
             <img class="back-icon" src="${back}" alt="back">
@@ -38,8 +33,20 @@ const PlayAux = ({ id }: { id: string }) => {
                 const store = transaction.objectStore('settings');
                 const playerSettings = store.get('player');
                 playerSettings.addEventListener('success', e => {
+                    const album = albums.result.find(item =>item.musics.find(elm => +elm.id === +id))
+                    const musicInd = album.musics.findIndex((item: MusicType) => +item.id === +id);
+                    let nextInd, prevInd;
+                    if (!playerSettings.result.is_shuffle) {
+                        prevInd = (musicInd - 1 + album.musics.length) % album.musics.length;
+                        nextInd = (musicInd + 1) % album.musics.length;
+                    } else {
+                        nextInd = musicInd;
+                        while (nextInd === musicInd)
+                            nextInd = ~~(Math.random() * album.musics.length);
+                        prevInd = nextInd;
+                    }
                     resolve(
-                        Play(albums.result.find(item =>item.musics.find(elm => +elm.id === +id)), id, playerSettings.result)
+                        Play(album.musics[musicInd], album.musics[prevInd].id, album.musics[nextInd].id, playerSettings.result)
                     );
                 })
                 
