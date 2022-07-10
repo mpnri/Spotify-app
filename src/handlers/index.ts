@@ -15,3 +15,20 @@ export const modifyMusic = (id : string, modify : Function) => {
         })
     });
 }
+
+export const actionSettings = (name : string, modify : Function, action: 'readwrite' | 'readonly' = 'readwrite') => {
+    const database = indexedDB.open('data', 1);
+    database.addEventListener('success', e => {
+        const db = database.result;
+        const transaction = db.transaction('settings', action);
+        const store = transaction.objectStore('settings');
+        const settings = store.get(name);
+        settings.addEventListener('success', e => {
+            const res = settings.result;
+            modify(res);
+            if (action === 'readwrite')
+                store.put(res);
+        })
+    });
+}
+

@@ -42,7 +42,7 @@ const PlayerControls = (music : MusicType, prevMusic : MusicType, nextMusic : Mu
             <source src="${music.track_url}" type="audio/mp3">
         </audio>
         <div class="controls">
-            <div class="option-btn${settings.is_shuffle ? ' option-btn--active':''}">
+            <div class="option-btn${settings.is_shuffle ? ' option-btn--active':''}" id="shuffle">
                 <img class="option-btn-icon" src="${shuffle}" alt="shuffle">
                 <div class="dot"></div>
             </div>
@@ -60,7 +60,7 @@ const PlayerControls = (music : MusicType, prevMusic : MusicType, nextMusic : Mu
                     <img src="${rightBtn}" alt="right button">
                 </div>
             </a>
-            <div class="option-btn${settings.is_repeat ? ' option-btn--active':''}">
+            <div class="option-btn${settings.is_repeat ? ' option-btn--active':''}" id="repeat">
                 <img class="option-btn-icon" src="${repeat}" alt="repeat">
                 <div class="dot"></div>
             </div>

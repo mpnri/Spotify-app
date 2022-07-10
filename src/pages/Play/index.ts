@@ -4,9 +4,9 @@ import more from '../../assets/icons/more.svg';
 import like from '../../assets/icons/like.svg';
 import liked from '../../assets/icons/liked.svg';
 
-import { AlbumType, DataType, MusicType } from "../../types";
+import { DataType, MusicType } from "../../types";
 import Player from "./Player";
-import { modifyMusic } from "../../handlers";
+import { actionSettings, modifyMusic } from "../../handlers";
 
 const Play = (item: DataType, id: string, settings) => {
     const musicList = item.musics;
@@ -47,8 +47,7 @@ const PlayAux = ({ id }: { id: string }) => {
     })
 }
 
-
-export const playLogic = ({id} : {id:string}) => {
+const playerLogic = ({ id }: { id: string; }) => {
     const player = document.getElementById('player') as HTMLAudioElement;
     const playerRange = document.getElementById('player-range') as HTMLInputElement;
     const timePassed = document.querySelector('.time-passed') as HTMLDivElement;
@@ -77,6 +76,19 @@ export const playLogic = ({id} : {id:string}) => {
             console.log('test');
 
             playBtn.dispatchEvent(new Event('click'));
+            actionSettings('player', (settings : {is_repeat:boolean;is_shuffled:boolean;}) => {
+                if (settings.is_repeat)
+                    setTimeout(() => {
+                        playBtn.dispatchEvent(new Event('click'));
+                    }, 500);
+                else {
+                    if (settings.is_shuffled) {
+
+                    } else {
+                        // todo: use handler? -> action album?
+                    }
+                }
+            }, 'readonly')
             // const time = ~~player.duration;
             // timePassed.textContent = ~~(time / 60) + ':' + (time % 60 > 9 ? '' : '0') + time % 60;
             
@@ -122,9 +134,42 @@ export const playLogic = ({id} : {id:string}) => {
         })
     })
 
+}
 
+export const playLogic = ({id} : {id:string}) => {
+    
+    playerLogic({id});
 
     //* other options
+
+    const shuffleBtn = document.getElementById('shuffle') as HTMLDivElement;
+    shuffleBtn.addEventListener('click', e => {
+        if (shuffleBtn.classList.contains('option-btn--active')) {
+            actionSettings('player', (settings) => {
+                settings.is_shuffle = false;
+            })
+        } else {
+            actionSettings('player', (settings) => {
+                settings.is_shuffle = true;
+            })
+        }
+        shuffleBtn.classList.toggle('option-btn--active');
+    });
+
+    const repeatBtn = document.getElementById('repeat') as HTMLDivElement;
+    repeatBtn.addEventListener('click', e => {
+        if (repeatBtn.classList.contains('option-btn--active')) {
+            actionSettings('player', (settings) => {
+                settings.is_repeat = false;
+            })
+        } else {
+            actionSettings('player', (settings) => {
+                settings.is_repeat = true;
+            })
+        }
+        repeatBtn.classList.toggle('option-btn--active');
+    });
+    
     
 
     const likeBtn = document.querySelector('.player .item-like') as HTMLImageElement;
