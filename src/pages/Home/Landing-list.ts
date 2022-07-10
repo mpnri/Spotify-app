@@ -1,7 +1,9 @@
 import {DataType, MusicType} from '../../types';
 
 const LandingList = (data: DataType[]) => {
-    const musics = data.reduce( (prev, item) => [...prev, ...item.musics], [] as MusicType[]).filter(item => item.is_played).slice(0,10);    
+    const musics = data.reduce( (prev, item) => [...prev, ...item.musics], [] as MusicType[])
+        .filter(item => item.is_played)
+        .sort((a,b) => +b.is_played - +a.is_played).slice(0,10);    
     return (''
         + '<div class="landing-list">'
             + `<div class="list-title">

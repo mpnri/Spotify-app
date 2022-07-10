@@ -7,7 +7,7 @@ export type MusicType = {
     "is_liked": boolean;
     "is_searched": boolean;
     "is_downloaded": boolean;
-    "is_played": boolean
+    "is_played": boolean | number
 }
 
 export type AlbumType = {

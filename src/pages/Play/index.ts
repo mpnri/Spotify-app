@@ -190,7 +190,11 @@ export const playLogic = ({id} : {id:string}) => {
     });
 
     modifyMusic(id, (music : MusicType) => {
-        music.is_played = true;
+        console.log('====================================');
+        console.log(Date.now());
+        console.log('====================================');
+        
+        music.is_played = Date.now();
     });
 
 }
