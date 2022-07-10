@@ -4,6 +4,7 @@ import Toolbar from "./Toolbar";
 import LandingListLg from "./Landing-list-lg";
 import { DataType } from "../../types";
 import Aux from "../../components/AuxElm";
+import LandingList from "./Landing-list";
 
 
 const Fade = () => `<div class="fade home-fade"></div>`;
@@ -17,7 +18,7 @@ const Home = (data : DataType[]) => {
         + '<div class="landing-lists">'
             + LandingListLg(data)
         
-            + LandingListLg(data)
+            + LandingList(data)
         
             + LandingListLg(data)
         + '</div>'

@@ -51,24 +51,29 @@ export const playLogic = ({id} : {id:string}) => {
     let timer = -1;
     const handleRange = () => {
         //* console.log(player.currentTime);
-
-        const time = +(player.currentTime || 0).toFixed(0);
-        const seekPosition = time * (100 / player.duration);
-
-        playerRange.value = (seekPosition || 0) + '';
+        
+        const currTime = (player.currentTime || 0);
+        const seekPosition = currTime * (100 / player.duration);
+        const time = Math.trunc(currTime);
+        //console.log(seekPosition);
+        
+        playerRange.value = (seekPosition || 0).toString();
         playerRange.style.backgroundSize = playerRange.value + '% 100%';
+        //console.log(time, time/60, (time/60).toFixed(0));
+        
 
-
-        timePassed.textContent = (time / 60).toFixed(0) + ':' + (time % 60 > 9 ? '' : '0') + time % 60;
-        const left = +((player.duration || 0) - time).toFixed(0)
-        timeLeft.textContent = (left / 60).toFixed(0) + ':' + (left % 60 > 9 ? '' : '0') + left % 60;
-        //console.log(time , player.duration || 0);
+        timePassed.textContent = ~~(time / 60) + ':' + (time % 60 > 9 ? '' : '0') + time % 60;
+        const left = Math.floor((player.duration || 0) - time);
+        timeLeft.textContent = ~~(left / 60) + ':' + (left % 60 > 9 ? '' : '0') + left % 60;
 
 
         if (player.currentTime === player.duration) {
             console.log('test');
 
             playBtn.dispatchEvent(new Event('click'));
+            // const time = ~~player.duration;
+            // timePassed.textContent = ~~(time / 60) + ':' + (time % 60 > 9 ? '' : '0') + time % 60;
+            
             // console.log(timer);
 
             // clearInterval(timer);
@@ -108,32 +113,40 @@ export const playLogic = ({id} : {id:string}) => {
         });
         window.addEventListener('popstate', e => {
             clearInterval(timer);
+            player.pause();
         })
     })
 
 
 
     //* other options
-    const likeBtn = document.querySelector('.player .item-like') as HTMLImageElement;
-    const database = indexedDB.open('data', 1);
-    database.addEventListener('success', e => {
-        const db = database.result;
-        likeBtn.addEventListener('click', e => {
+    function modifyMusic(id : string, modify : Function) {
+        const database = indexedDB.open('data', 1);
+        database.addEventListener('success', e => {
+            const db = database.result;
             const transaction = db.transaction('albums', "readwrite");
             const store = transaction.objectStore('albums');
             const albums = store.getAll();
             albums.addEventListener('success', e => {
                 const data = albums.result.find(item => item.musics.find(elm => +elm.id === +id)) as DataType;
                 const music = data.musics.find(music => +music.id === +id) as MusicType;
-                music.is_liked = !music.is_liked;
-                console.log(data.musics.find(music => +music.id === +id));
+                modify(music);
                 store.put(data);
-                likeBtn.src = music.is_liked ? liked : like;
             })
         });
+    }
+
+    const likeBtn = document.querySelector('.player .item-like') as HTMLImageElement;
+    likeBtn.addEventListener('click', e => {
+        modifyMusic(id, (music : MusicType) => {
+            music.is_liked = !music.is_liked;
+            likeBtn.src = music.is_liked ? liked : like;
+        })
     });
 
-
+    modifyMusic(id, (music : MusicType) => {
+        music.is_played = true;
+    });
 
 }
 

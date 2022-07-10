@@ -1,4 +1,4 @@
-@import url('http://fonts.cdnfonts.com/css/circular-std');
+@import url('https://fonts.cdnfonts.com/css/circular-std');
 
 :root {
     --bg-color: #121212;
@@ -174,6 +174,11 @@ body::before {
     gap: 2.5rem;
 }
 
+.landing-lists a {
+    all: unset;
+}
+
+
 .list-items {
     display: flex;
     gap: 1rem;
@@ -187,8 +192,17 @@ body::before {
     display: none;
 }
 
+.home .list-items .list-item{
+    width: 124px;
+}
+
+
 .item-img {
     height: 124px;
+}
+
+.list-item > .item-title {
+    margin-top: 5px;
 }
 
 .list-item-lg .item-img {
@@ -485,7 +499,7 @@ mic
 
 
 .album-fade {
-    width: 100vw;
+    width: 100%;
     height: 100vw;
     max-height: 500px;
     filter: blur(63px);
