@@ -1,9 +1,12 @@
 import Menu from "../../../components/Menu";
 
 import back from '../../../assets/icons/back.svg';
+import like from '../../../assets/icons/like.svg';
+import liked from '../../../assets/icons/liked.svg';
 
 import Profile from "./Profile";
-import { DataType } from "../../../types";
+import { DataType, MusicType } from "../../../types";
+import { modifyMusic } from "../../../handlers";
 
 const Album = (item : DataType) => {
     return (''
@@ -27,6 +30,37 @@ const AlbumAux = ({ id }: { id: string }) => {
             })
         });
     })
+}
+
+export const albumLogic = ({ id }: { id: string }) => {
+    const likeBtn = document.querySelector('.profile .profile-like') as HTMLImageElement;
+    const database = indexedDB.open('data', 1);
+    database.addEventListener('success', e => {
+        const db = database.result;
+        likeBtn.addEventListener('click', e => {            
+            const transaction = db.transaction('albums', "readwrite");
+            const store = transaction.objectStore('albums');
+            const album = store.get(id);
+            album.addEventListener('success', e => {
+                const res = album.result as DataType;
+                let is_like = false;
+                if (likeBtn.src === liked) {
+                    likeBtn.src = like;
+                    is_like = false;
+                } else {
+                    likeBtn.src = liked;
+                    is_like = true;
+                }
+                
+                res.musics.forEach(music => {
+                    music.is_liked = is_like;
+                })
+                console.log(res);
+                
+                store.put(res);
+            })
+        });
+    });
 }
 
 export default AlbumAux;

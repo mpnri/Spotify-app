@@ -1,6 +1,7 @@
 import { AlbumType, DataType, MusicType } from "../../../types";
 
 import like from '../../../assets/icons/like.svg';
+import liked from '../../../assets/icons/liked.svg';
 import download from '../../../assets/icons/download.svg';
 import more from '../../../assets/icons/more.svg';
 import play from '../../../assets/icons/play.svg';
@@ -47,7 +48,7 @@ const ProfileCard = (item : DataType) => `
                 </div>
             </div>
             <div class="profile-toolbar">
-                <img src="${like}" alt="like" class="profile-like"/>
+                <img src="${item.musics.every(elm => elm.is_liked) ? liked:like}" alt="like" class="profile-like"/>
                 <img src="${download}" alt="download" class="profile-download"/>
                 <img src="${more}" alt="more" class="profile-more"/>
             </div>

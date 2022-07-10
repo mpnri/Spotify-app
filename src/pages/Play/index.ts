@@ -6,8 +6,9 @@ import liked from '../../assets/icons/liked.svg';
 
 import { AlbumType, DataType, MusicType } from "../../types";
 import Player from "./Player";
+import { modifyMusic } from "../../handlers";
 
-const Play = (item: DataType, id: string) => {
+const Play = (item: DataType, id: string, settings) => {
     const musicList = item.musics;
     const musicInd = musicList.findIndex((item: MusicType) => +item.id === +id);
     const music = musicList[musicInd] as any;
@@ -19,7 +20,7 @@ const Play = (item: DataType, id: string) => {
             <div class="title">Liked Songs</div>
             <img src="${more}" alt="more" class="item-more">
         </div>
-        ${Player(music, prevMusic, nextMusic)}
+        ${Player(music, prevMusic, nextMusic, settings)}
         ${Menu('library')}
     `);
 };
@@ -29,13 +30,18 @@ const PlayAux = ({ id }: { id: string }) => {
         const database = indexedDB.open('data', 1);
         database.addEventListener('success', e => {
             const db = database.result;
-            const transaction = db.transaction('albums', "readonly");
+            const transaction = db.transaction(['albums', 'settings'], "readonly");
             const store = transaction.objectStore('albums');
             const albums = store.getAll();
             albums.addEventListener('success', e => {
-                resolve(
-                    Play(albums.result.find(item =>item.musics.find(elm => +elm.id === +id)), id)
-                );
+                const store = transaction.objectStore('settings');
+                const playerSettings = store.get('player');
+                playerSettings.addEventListener('success', e => {
+                    resolve(
+                        Play(albums.result.find(item =>item.musics.find(elm => +elm.id === +id)), id, playerSettings.result)
+                    );
+                })
+                
             })
         });
     })
@@ -84,18 +90,15 @@ export const playLogic = ({id} : {id:string}) => {
     }
     handleRange();
     player.addEventListener('loadedmetadata', e => {
+        //if (timer !== -10)return;
         playerRange.addEventListener('input', e => {
             playerRange.style.backgroundSize = playerRange.value + '% 100%';
             player.currentTime = player.duration * (+playerRange.value / 100);
             handleRange();
         })
-
-
-
-        player.play();
-
-        //if (timer < 0)
-        timer = setInterval(handleRange, 100);
+        
+            player.play();
+            timer = setInterval(handleRange, 100);
         console.log(timer);
 
         playBtn.addEventListener('click', e => {
@@ -112,29 +115,17 @@ export const playLogic = ({id} : {id:string}) => {
             playBtn.classList.toggle('play-button--active');
         });
         window.addEventListener('popstate', e => {
+            //! clear load method?
             clearInterval(timer);
             player.pause();
+            player.src = '';
         })
     })
 
 
 
     //* other options
-    function modifyMusic(id : string, modify : Function) {
-        const database = indexedDB.open('data', 1);
-        database.addEventListener('success', e => {
-            const db = database.result;
-            const transaction = db.transaction('albums', "readwrite");
-            const store = transaction.objectStore('albums');
-            const albums = store.getAll();
-            albums.addEventListener('success', e => {
-                const data = albums.result.find(item => item.musics.find(elm => +elm.id === +id)) as DataType;
-                const music = data.musics.find(music => +music.id === +id) as MusicType;
-                modify(music);
-                store.put(data);
-            })
-        });
-    }
+    
 
     const likeBtn = document.querySelector('.player .item-like') as HTMLImageElement;
     likeBtn.addEventListener('click', e => {

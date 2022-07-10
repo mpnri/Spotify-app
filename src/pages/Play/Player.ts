@@ -29,7 +29,7 @@ const Profile = (music : MusicType) => `
 `;
 
 
-const PlayerControls = (music : MusicType, prevMusic : MusicType, nextMusic : MusicType) => `
+const PlayerControls = (music : MusicType, prevMusic : MusicType, nextMusic : MusicType, settings : {is_repeat: boolean;is_shuffle: boolean;}) => `
     <div class="player__controls">
         <div class="range">
             <input id="player-range" type="range" style="background-size: 0% 100%;" value="0" min="0" max="100" class="range-bar" />
@@ -42,7 +42,7 @@ const PlayerControls = (music : MusicType, prevMusic : MusicType, nextMusic : Mu
             <source src="${music.track_url}" type="audio/mp3">
         </audio>
         <div class="controls">
-            <div class="option-btn option-btn--active">
+            <div class="option-btn${settings.is_shuffle ? ' option-btn--active':''}">
                 <img class="option-btn-icon" src="${shuffle}" alt="shuffle">
                 <div class="dot"></div>
             </div>
@@ -60,7 +60,7 @@ const PlayerControls = (music : MusicType, prevMusic : MusicType, nextMusic : Mu
                     <img src="${rightBtn}" alt="right button">
                 </div>
             </a>
-            <div class="option-btn">
+            <div class="option-btn${settings.is_repeat ? ' option-btn--active':''}">
                 <img class="option-btn-icon" src="${repeat}" alt="repeat">
                 <div class="dot"></div>
             </div>
@@ -72,10 +72,10 @@ const PlayerControls = (music : MusicType, prevMusic : MusicType, nextMusic : Mu
     </div>
 `;
 
-const Player = (music : MusicType, prevMusic : MusicType, nextMusic : MusicType) => `
+const Player = (music : MusicType, prevMusic : MusicType, nextMusic : MusicType, settings) => `
     <div class="player">
         ${Profile(music)}
-        ${PlayerControls(music, prevMusic, nextMusic)}
+        ${PlayerControls(music, prevMusic, nextMusic, settings)}
     </div>
 `;
 

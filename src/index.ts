@@ -1,7 +1,7 @@
 import Library from "./pages/Library/";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
-import Album from "./pages/Library/Album";
+import Album, { albumLogic } from "./pages/Library/Album";
 import LikedSongs from "./pages/Library/LikedSongs";
 import Play, {playLogic} from "./pages/Play";
 
@@ -28,7 +28,14 @@ database.addEventListener('upgradeneeded', e => {
                 item['id'] = item.album.id;
                 store.add(item);
             });
-            
+            const storeSettings = db.createObjectStore('settings', {
+                keyPath: 'name'
+            });
+            storeSettings.add({
+                name: 'player',
+                is_repeat: false,
+                is_shuffle: false,
+            })
     }
 
     
@@ -52,7 +59,7 @@ const routes = {
     '/library/albums': {run: Library('albums'), logic: ()=>{}},
     '/library/artists': {run: Library('artists'), logic: ()=>{}},
     '/library/playlists': {run: Library('playlists'), logic: ()=>{}},
-    '/library/album/:id': {run: Album, logic: ()=>{}},
+    '/library/album/:id': {run: Album, logic: albumLogic},
     '/library/liked-songs': {run: LikedSongs, logic: ()=>{}},
     '/play/:id': {run: Play, logic: playLogic}
 };
