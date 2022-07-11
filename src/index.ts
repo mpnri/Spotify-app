@@ -23,9 +23,12 @@ database.addEventListener('upgradeneeded', e => {
                     elm.is_searched = false;
                     elm.is_downloaded = false;
                     elm.is_played = false;
+                    elm.blob_thumb = '';
+                    elm.blob_url = '';
                 })
-                item.album['is_searched'] =false;
+                item.album['is_searched'] = false;
                 item['id'] = item.album.id;
+                item.album['blob_thumb'] = ''
                 store.add(item);
             });
             const storeSettings = db.createObjectStore('settings', {
@@ -92,7 +95,7 @@ async function processRoutes() {
             App.innerHTML = await routes[route].run(pathData);
             routes[route].logic(pathData);
         } else {
-            App.innerHTML = `<h1 style="text-align:center;">404 not found</h1>`
+            //App.innerHTML = `<h1 style="text-align:center;">404 not found</h1>`
         }
     }
 

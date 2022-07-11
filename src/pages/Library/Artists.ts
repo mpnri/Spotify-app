@@ -9,7 +9,7 @@ const ArtistsItem = (album : AlbumType) => `
     <!--<a href="./albums/${album.id}/" style="all:unset">-->
         <div class="list-item">
             <div class="item-container">
-                <img src="${album.album_thumb}" alt="item-img" class="item-img circle-item">
+                <img src="${album.blob_thumb || album.album_thumb}" alt="item-img" class="item-img circle-item">
                 <div class="item-info">
                     <div class="item-name">${album.album_composer}</div>
                 </div>

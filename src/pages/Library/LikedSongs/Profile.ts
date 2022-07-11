@@ -9,7 +9,7 @@ const ProfileListItem = (music : MusicType) => `
     <div class="list-item">
         <a href="/play/${music.id}">
             <div class="item-container">
-                <img src="${music.track_thumb}" alt="item-img" class="item-img">
+                <img src="${music.blob_thumb || music.track_thumb}" alt="item-img" class="item-img">
                 <div class="item-info">
                     <div class="item-name">${music.track_name}</div>
                     <div class="item-tag">

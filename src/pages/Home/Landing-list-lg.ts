@@ -10,7 +10,7 @@ const LandingListLg = (data: DataType[]) => {
             + data.sort((a, b) => 0.5 - Math.random()).map(({ id, musics }) => (`
                     <a href="/library/album/${id}">
                         <div class="list-item-lg">
-                            <img src="${musics[0].track_thumb}" alt="${musics[0].track_name}" class="item-img">
+                            <img src="${musics[0].blob_thumb || musics[0].track_thumb}" alt="${musics[0].track_name}" class="item-img">
                         </div>
                     </a>
                 `)).join('')

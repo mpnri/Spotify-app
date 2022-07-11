@@ -42,8 +42,11 @@ export const actionAlbum = (id : string, modify : Function, action: 'readwrite' 
         album.addEventListener('success', e => {
             const res = album.result;
             modify(res);
+            console.log(res, action === 'readwrite');
+            
             if (action === 'readwrite')
-                store.put(res);
+                store.put(res).onsuccess = () => console.log('baleeeeeeeeeeeeeeeeeeee');
+                
         })
     });
 }

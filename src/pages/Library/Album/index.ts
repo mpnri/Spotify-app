@@ -5,10 +5,12 @@ import like from '../../../assets/icons/like.svg';
 import liked from '../../../assets/icons/liked.svg';
 
 import Profile from "./Profile";
-import { DataType, MusicType } from "../../../types";
-import { actionSettings, getAlbums, modifyMusic } from "../../../handlers";
+import { AlbumType, DataType, MusicType } from "../../../types";
+import { actionAlbum, actionSettings, getAlbums, modifyMusic } from "../../../handlers";
 
 const Album = (item : DataType, settings) => {
+    console.log(item);
+    
     return (''
         + '<div class="fade album-fade"></div>'
         + `<div class="back-icon real-back"><img src="${back}" alt="back"></div>`
@@ -94,7 +96,47 @@ export const albumLogic = ({ id }: { id: string }) => {
         history.pushState({},'', '/library/albums');
         window['router']();
     })
+    actionAlbum(id, (res : DataType) => {
+        // const blobImg = new Image();
+        // blobImg.crossOrigin = "Anonymous";
+        // blobImg.addEventListener('load', e => {
+        //     let canvas = document.createElement('canvas');
+        //     canvas.width = blobImg.clientWidth;
+        //     canvas.height = blobImg.clientHeight;
 
+        //     let context = canvas.getContext('2d')!;
+
+        //     // copy image to it (this method allows to cut image)
+        //     context.drawImage(blobImg, 0, 0);
+        //     canvas.toBlob((blob) => {
+        //         console.log(URL.createObjectURL(blob!));
+                
+        //     })
+        // })
+        // blobImg.src = res.album.album_thumb.replace('https', 'http');
+
+        //! download img and convert to blob
+        // fetch(res.album.album_thumb, {
+        //     //mode: 'no-cors'
+        // })
+        //     //.then(res => res.blob())
+        //     .then(res => {
+        //         console.log(res.ok);
+        //         return res.blob();
+        //     })
+        //     .then(data => {
+        //         URL.revokeObjectURL(res.album.blob_thumb)
+        //         actionAlbum(id, (newRes : DataType) => {
+        //             console.log(data);
+                    
+        //             newRes.album.blob_thumb = URL.createObjectURL(data);
+        //             //res.album.is_searched = true;
+                    
+        //             console.log(newRes.album.blob_thumb);
+        //         }, 'readwrite')
+                
+        //     })
+    }, 'readonly')
 }
 
 export default AlbumAux;
