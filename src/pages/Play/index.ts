@@ -120,7 +120,12 @@ const playerLogic = ({ id }: { id: string; }) => {
     handleRange();
     player.addEventListener('loadedmetadata', load)
     function load(e) {
-        //if (timer !== -10)return;
+        //! remove Event Listener Fails
+        const pathList = location.pathname.split('/');
+        if (pathList[pathList.length-1] !== id) {
+            clearInterval(timer);
+            return;
+        }
         playerRange.addEventListener('input', e => {
             playerRange.style.backgroundSize = playerRange.value + '% 100%';
             player.currentTime = player.duration * (+playerRange.value / 100);
