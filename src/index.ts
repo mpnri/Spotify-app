@@ -1,6 +1,6 @@
 import Library from "./pages/Library/";
 import Home from "./pages/Home";
-import Search from "./pages/Search";
+import Search, { searchLogic } from "./pages/Search";
 import Album, { albumLogic } from "./pages/Library/Album";
 import LikedSongs from "./pages/Library/LikedSongs";
 import Play, {playLogic} from "./pages/Play";
@@ -17,7 +17,7 @@ database.addEventListener('upgradeneeded', e => {
             const store = db.createObjectStore('albums', {
                 keyPath: 'id'
             });
-            data.forEach(item => {
+            data.filter(elm => elm.album.album_name).forEach(item => {
                 item.musics.forEach(elm => {
                     elm.is_liked = false;
                     elm.is_searched = false;
@@ -54,7 +54,7 @@ database.onsuccess = () => {
 const App = document.getElementById('app')!;
 const routes = {
     '/': {run: Home, logic: ()=>{}},
-    '/search': {run: Search, logic: ()=>{}},
+    '/search': {run: Search, logic: searchLogic},
     '/library': {run: Library('albums'), logic: ()=>{}},
     '/library/albums': {run: Library('albums'), logic: ()=>{}},
     '/library/artists': {run: Library('artists'), logic: ()=>{}},
@@ -67,8 +67,10 @@ const routes = {
 async function processRoutes() {
     const currentRoute = window.location.pathname;
     
-    if (routes.hasOwnProperty(currentRoute))
+    if (routes.hasOwnProperty(currentRoute)) {
         App.innerHTML = await routes[currentRoute].run();
+        routes[currentRoute].logic();
+    }
     else
     {
         const pathList = location.pathname.split('/').filter(item => item);
@@ -98,9 +100,7 @@ async function processRoutes() {
     
     // App.innerHTML = routes['/']();
     handleLinks();
-    document.querySelector('.back-icon')?.addEventListener('click', e => {
-        history.back();
-    })
+
 }
 
 window['router'] = processRoutes;

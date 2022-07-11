@@ -6,7 +6,7 @@ const SearchBox = () => {
         + `<div class="search">
             <div class="search-box">
                 <div class="search-bar">
-                    <input type="text" placeholder="Search" class="search-bar__input">
+                    <input type="text" placeholder="Search" id="search" class="search-bar__input">
                     <img src="${search}" alt="search" class="search-bar__icon">
                 </div>
                 <div class="search-box__cancel">Cancel</div>

@@ -11,7 +11,7 @@ import { actionSettings, getAlbums, modifyMusic } from "../../../handlers";
 const Album = (item : DataType, settings) => {
     return (''
         + '<div class="fade album-fade"></div>'
-        + `<div class="back-icon"><img src="${back}" alt="back"></div>`
+        + `<div class="back-icon real-back"><img src="${back}" alt="back"></div>`
         + Profile(item, settings)
         + Menu('search')
     );
@@ -89,6 +89,11 @@ export const albumLogic = ({ id }: { id: string }) => {
             shuffleBtn.classList.toggle('shuffle-btn--active')
         }, 'readwrite');
     });
+
+    document.querySelector('.real-back')?.addEventListener('click', e => {
+        history.pushState({},'', '/library/albums');
+        window['router']();
+    })
 
 }
 

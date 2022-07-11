@@ -6,7 +6,7 @@ import liked from '../../assets/icons/liked.svg';
 
 import { DataType, MusicType } from "../../types";
 import Player from "./Player";
-import { actionSettings, getAlbums, modifyMusic } from "../../handlers";
+import { actionSettings, getAlbums, modifyMusic, actionAlbum } from "../../handlers";
 import Albums from "../Library/Albums";
 
 const Play = (music: MusicType, prevMusic: number, nextMusic: number, settings) => {
@@ -116,17 +116,19 @@ const playerLogic = ({ id }: { id: string; }) => {
 
         }
     }
+    
     handleRange();
-    player.addEventListener('loadedmetadata', e => {
+    player.addEventListener('loadedmetadata', load)
+    function load(e) {
         //if (timer !== -10)return;
         playerRange.addEventListener('input', e => {
             playerRange.style.backgroundSize = playerRange.value + '% 100%';
             player.currentTime = player.duration * (+playerRange.value / 100);
             handleRange();
         })
-        
-            player.play();
-            timer = setInterval(handleRange, 100);
+
+        player.play();
+        timer = setInterval(handleRange, 100);
         console.log(timer);
 
         playBtn.addEventListener('click', e => {
@@ -142,13 +144,26 @@ const playerLogic = ({ id }: { id: string; }) => {
             }
             playBtn.classList.toggle('play-button--active');
         });
-        window.addEventListener('popstate', e => {
-            //! clear load method?
-            clearInterval(timer);
-            player.pause();
-            //player.removeEventListener();
-        })
+        
+        
+    }
+    window.addEventListener('popstate', e => {
+        //! clear load method?
+        clearInterval(timer);
+        player.pause();
+        player.removeEventListener('click', load);
     })
+    const leftBtn = document.querySelector('a > .left-btn') as HTMLDivElement;
+    leftBtn.addEventListener('click', e => {
+        player.removeEventListener('click', load);
+    });
+
+    const rightBtn = document.querySelector('a > .right-btn') as HTMLDivElement;
+    rightBtn.addEventListener('click', e => {
+        console.log('right');
+        
+        player.removeEventListener('click', load);
+    });
 
 }
 
@@ -202,6 +217,15 @@ export const playLogic = ({id} : {id:string}) => {
         console.log('====================================');
         
         music.is_played = Date.now();
+    });
+
+    const backBtn = document.querySelector('.back-icon:not(.real-back)') as HTMLImageElement;
+    backBtn.addEventListener('click', e => {
+        getAlbums( (albums : DataType[]) => {
+            const album = albums.find(item => item.musics.find(elm => +elm.id === +id));
+            history.pushState({}, '', `/library/album/${album?.id}`)
+            window['router']();
+        });
     });
 
 }
