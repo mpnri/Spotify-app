@@ -134,11 +134,12 @@ const playerLogic = ({ id }: { id: string; }) => {
                     modifyMusic(id, (newMusic : MusicType) => {
                         console.log(data);
                         newMusic.blob_url = data;
+                        newMusic.is_downloaded = true;
                     })
                 })
                 .catch(err => {
                     console.log(err);
-                    
+                    music.is_downloaded = !!music.blob_url;
                 })
             fetch(music.track_thumb)
                 .then(res => res.ok ? res.blob():(()=>{throw new Error(res.statusText)})())

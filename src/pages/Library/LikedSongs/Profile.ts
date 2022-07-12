@@ -13,14 +13,14 @@ const ProfileListItem = (music : MusicType) => `
                 <div class="item-info">
                     <div class="item-name">${music.track_name}</div>
                     <div class="item-tag">
-                        <img class="item-tag__icon" src="${downloaded}" alt="download">
+                        <img class="item-tag__icon" src="${music.is_downloaded ? downloaded:download}" alt="download">
                         <div class="item-tag__data">Track <div class="dot"></div>${music.track_time}</div>
                     </div>
                 </div>
             </div>
         </a>
         <div class="item-toolbar">
-            <img src="${liked}" alt="like" class="item-like">
+            <img src="${liked}" data-id=${music.id} alt="like" class="item-like">
             <img src="${more}" alt="more" class="item-more">
         </div>
     </div>
@@ -50,9 +50,9 @@ const Profile = (data: DataType[]) => {
             </div>
             <div class="profile__toolbar">
                 <div class="toolbar__item">
-                    <div class="item__name">Downloading...</div>
+                    <div class="item__name">Download</div>
                     <div class="item__checkbox">
-                        <div class="checkbox checkbox--active">
+                        <div class="checkbox">
                             <div class="check"></div>
                         </div>
                     </div>

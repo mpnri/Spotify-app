@@ -116,17 +116,12 @@ export const albumLogic = ({ id }: { id: string }) => {
         // blobImg.src = res.album.album_thumb.replace('https', 'http');
 
         //! download img and convert to blob
-        fetch(res.album.album_thumb, {
-            
-        })
+        fetch(res.album.album_thumb)
             .then(res => res.ok ? res.blob():(()=>{throw new Error(res.statusText)})())
             .then(data => {                
                 actionAlbum(id, (newRes : DataType) => {
                     console.log(data);
-                    
                     newRes.album.blob_thumb = data;
-                    //res.album.is_searched = true;
-                    
                     console.log(newRes.album.blob_thumb.toString());
                 }, 'readwrite')
             })

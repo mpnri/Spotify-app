@@ -2,7 +2,7 @@ import Library from "./pages/Library/";
 import Home from "./pages/Home";
 import Search, { searchLogic } from "./pages/Search";
 import Album, { albumLogic } from "./pages/Library/Album";
-import LikedSongs from "./pages/Library/LikedSongs";
+import LikedSongs, { likedSongsLogic } from "./pages/Library/LikedSongs";
 import Play, {playLogic} from "./pages/Play";
 
 import data from './data/data.json';
@@ -63,7 +63,7 @@ const routes = {
     '/library/artists': {run: Library('artists'), logic: ()=>{}},
     '/library/playlists': {run: Library('playlists'), logic: ()=>{}},
     '/library/album/:id': {run: Album, logic: albumLogic},
-    '/library/liked-songs': {run: LikedSongs, logic: ()=>{}},
+    '/library/liked-songs': {run: LikedSongs, logic: likedSongsLogic},
     '/play/:id': {run: Play, logic: playLogic}
 };
 
