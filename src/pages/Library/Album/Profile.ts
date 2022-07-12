@@ -3,6 +3,7 @@ import { AlbumType, DataType, MusicType } from "../../../types";
 import like from '../../../assets/icons/like.svg';
 import liked from '../../../assets/icons/liked.svg';
 import download from '../../../assets/icons/download.svg';
+import downloaded from '../../../assets/icons/downloaded.svg';
 import more from '../../../assets/icons/more.svg';
 import play from '../../../assets/icons/play.svg';
 import shuffle from '../../../assets/icons/shuffle.svg';
@@ -14,7 +15,7 @@ const ProfileListItem = (music: MusicType) => `
                 <div class="item-info">
                     <div class="item-name">${music.track_name}</div>
                     <div class="item-tag">
-                        <img class="item-tag__icon" src="${download}" alt="download">
+                        <img class="item-tag__icon" src="${music.is_downloaded ? downloaded:download}" alt="download">
                         <div class="item-tag__data">Track: ${music.track_time}</div>
                     </div>
                 </div>
@@ -49,7 +50,7 @@ const ProfileCard = (item : DataType, {is_shuffle}) => `
             </div>
             <div class="profile-toolbar">
                 <img src="${item.musics.every(elm => elm.is_liked) ? liked:like}" alt="like" class="profile-like"/>
-                <img src="${download}" alt="download" class="profile-download"/>
+                <img src="${item.musics.every(elm => elm.is_downloaded) ? downloaded:download}" alt="download" class="profile-download"/>
                 <img src="${more}" alt="more" class="profile-more"/>
             </div>
         </div>
