@@ -13,7 +13,7 @@ const ProfileListItem = (music : MusicType) => `
                 <div class="item-info">
                     <div class="item-name">${music.track_name}</div>
                     <div class="item-tag">
-                        <img class="item-tag__icon" src="${music.is_downloaded ? downloaded:download}" alt="download">
+                        <img class="item-tag__icon" data-id=${music.id} src="${music.is_downloaded ? downloaded:download}" alt="download">
                         <div class="item-tag__data">Track <div class="dot"></div>${music.track_time}</div>
                     </div>
                 </div>

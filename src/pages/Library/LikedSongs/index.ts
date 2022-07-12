@@ -1,6 +1,8 @@
 import Menu from "../../../components/Menu";
 
 import back from '../../../assets/icons/back.svg';
+import downloaded from '../../../assets/icons/downloaded.svg';
+
 import Profile from "./Profile";
 
 import { DataType, MusicType } from "../../../types";
@@ -49,22 +51,30 @@ export const likedSongsLogic = () => {
         checkbox.classList.toggle('checkbox--active');
         if (checkbox.classList.contains('checkbox--active')) {
             itemName.textContent = 'Downloading...';
-            
+            itemCheckbox.setAttribute('active-download', 'yes');
             getAlbums((data: DataType[]) => {
                 const musics = data.reduce((prev, { musics }) => [...prev, ...musics], [] as MusicType[]);
                 const likedList = musics.filter(music => music.is_liked);
+                console.log(likedList);
                 const downloadMusicList = (ind = 0) => {
                     if (ind === likedList.length) {
                         itemCheckbox.dispatchEvent(new Event('click'));
                         itemName.textContent = 'Download Finished!';
                         return;
                     }
-                    if (likedList[ind].is_downloaded) {
+                    console.log(ind);
+                    if (!likedList[ind].is_downloaded) {
                         fetch(likedList[ind].track_url)
                             .then(res => res.ok ? res.blob() : (() => { throw new Error(res.statusText) })())
                             .then(data => {
+                                if (itemCheckbox.getAttribute('active-download') === 'no')
+                                    return;
                                 modifyMusic(likedList[ind].id + '', (music: MusicType) => {
+                                    console.log(data);
+                                    const target = document.querySelector(`.item-tag__icon[data-id="${music.id}"]`) as HTMLVideoElement;
+                                    target.src = downloaded;
                                     music.blob_url = data;
+                                    music.is_downloaded = true;
                                     downloadMusicList(ind + 1);
                                 });
                             })
@@ -79,6 +89,7 @@ export const likedSongsLogic = () => {
             });
 
         } else {
+            itemCheckbox.setAttribute('active-download', 'no');
             itemName.textContent = 'Download';
         }
     })
