@@ -116,26 +116,26 @@ export const albumLogic = ({ id }: { id: string }) => {
         // blobImg.src = res.album.album_thumb.replace('https', 'http');
 
         //! download img and convert to blob
-        // fetch(res.album.album_thumb, {
-        //     //mode: 'no-cors'
-        // })
-        //     //.then(res => res.blob())
-        //     .then(res => {
-        //         console.log(res.ok);
-        //         return res.blob();
-        //     })
-        //     .then(data => {
-        //         URL.revokeObjectURL(res.album.blob_thumb)
-        //         actionAlbum(id, (newRes : DataType) => {
-        //             console.log(data);
+        fetch(res.album.album_thumb, {
+            
+        })
+            .then(res => res.ok ? res.blob():(()=>{throw new Error(res.statusText)})())
+            .then(data => {                
+                actionAlbum(id, (newRes : DataType) => {
+                    console.log(data);
                     
-        //             newRes.album.blob_thumb = URL.createObjectURL(data);
-        //             //res.album.is_searched = true;
+                    newRes.album.blob_thumb = data;
+                    //res.album.is_searched = true;
                     
-        //             console.log(newRes.album.blob_thumb);
-        //         }, 'readwrite')
-                
-        //     })
+                    console.log(newRes.album.blob_thumb.toString());
+                }, 'readwrite')
+            })
+            .catch(err => {
+                actionAlbum(id, (newRes : DataType) => {
+                    //newRes.album.blob_thumb = null;
+                }, 'readwrite')
+                console.log(err);
+            })
     }, 'readonly')
 }
 

@@ -1,6 +1,6 @@
 import { DataType, MusicType } from "../types";
 
-export const modifyMusic = (id : string, modify : Function) => {
+export const modifyMusic = (id : string, modify : Function, action: 'readwrite' | 'readonly' = 'readwrite') => {
     const database = indexedDB.open('data', 1);
     database.addEventListener('success', e => {
         const db = database.result;
@@ -11,7 +11,8 @@ export const modifyMusic = (id : string, modify : Function) => {
             const data = albums.result.find(item => item.musics.find(elm => +elm.id === +id)) as DataType;
             const music = data.musics.find(music => +music.id === +id) as MusicType;
             modify(music);
-            store.put(data);
+            if (action === 'readwrite')
+                store.put(data);
         })
     });
 }

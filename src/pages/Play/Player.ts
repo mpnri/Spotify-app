@@ -13,7 +13,7 @@ import repeat from '../../assets/icons/repeat.svg';
 
 const Profile = (music : MusicType) => `
     <div class="profile">
-        <img src="${music.blob_thumb || music.track_thumb}" alt="profile-img" class="profile-img">
+        <img src="${music.blob_thumb ? URL.createObjectURL(music.blob_thumb) : music.track_thumb}" alt="profile-img" class="profile-img">
         <div class="item-container">
             <div class="item-info">
                 <div class="item-name">${music.track_name}</div>
@@ -39,7 +39,7 @@ const PlayerControls = (music : MusicType, prevMusic : number, nextMusic : numbe
             </div>
         </div>
         <audio id="player">
-            <source src="${music.blob_url || music.track_url}" type="audio/mp3">
+            <source src="${music.blob_url ? URL.createObjectURL(music.blob_url) : music.track_url}" type="audio/mp3">
         </audio>
         <div class="controls">
             <div class="option-btn${settings.is_shuffle ? ' option-btn--active':''}" id="shuffle">

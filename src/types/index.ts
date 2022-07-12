@@ -8,8 +8,8 @@ export type MusicType = {
     "is_searched": boolean | number;
     "is_downloaded": boolean;
     "is_played": boolean | number;
-    "blob_thumb": string;
-    "blob_url": string;
+    "blob_thumb": Blob | null;
+    "blob_url": Blob | null;
 }
 
 export type AlbumType = {
@@ -20,7 +20,7 @@ export type AlbumType = {
     "album_thumb": string;
     "album_url": string;
     "is_searched": boolean | number;
-    "blob_thumb": string;
+    "blob_thumb": Blob | null;
 }
 
 export type TabType = 'albums' | 'artists' | 'playlists';

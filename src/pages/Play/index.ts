@@ -126,6 +126,33 @@ const playerLogic = ({ id }: { id: string; }) => {
             clearInterval(timer);
             return;
         }
+        console.log('src: ', player.src);
+        modifyMusic(id, (music : MusicType) => {
+            fetch(music.track_url)
+                .then(res => res.ok ? res.blob():(()=>{throw new Error(res.statusText)})())
+                .then(data => {
+                    modifyMusic(id, (newMusic : MusicType) => {
+                        console.log(data);
+                        newMusic.blob_url = data;
+                    })
+                })
+                .catch(err => {
+                    console.log(err);
+                    
+                })
+            fetch(music.track_thumb)
+                .then(res => res.ok ? res.blob():(()=>{throw new Error(res.statusText)})())
+                .then(data => {
+                    modifyMusic(id, (newMusic : MusicType) => {
+                        console.log(data);
+                        newMusic.blob_thumb = data;
+                    })
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }, 'readonly')
+    
         playerRange.addEventListener('input', e => {
             playerRange.style.backgroundSize = playerRange.value + '% 100%';
             player.currentTime = player.duration * (+playerRange.value / 100);

@@ -16,12 +16,12 @@ const RecentSearch = (data : (AlbumType | MusicType)[]) => {
                             let img, name, tag;
                             if (elm.hasOwnProperty('album_name')) {
                                 elm = elm as AlbumType;
-                                img = elm.blob_thumb || elm.album_thumb;
+                                img = elm.blob_thumb ? URL.createObjectURL(elm.blob_thumb) : elm.album_thumb;
                                 name = elm.album_name;
                                 tag = elm.album_composer;
                             } else {
                                 elm = elm as MusicType;
-                                img = elm.blob_thumb || elm.track_thumb;
+                                img = elm.blob_thumb ? URL.createObjectURL(elm.blob_thumb) : elm.track_thumb;
                                 name = elm.track_name;
                                 tag = 'Track: ' + elm.track_time;
                             }

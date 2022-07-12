@@ -13,7 +13,7 @@ const LandingList = (data: DataType[]) => {
             + musics.map((music) => (`
                     <a href="/play/${music.id}">
                         <div class="list-item">
-                            <img src="${music.blob_thumb || music.track_thumb}" alt="item-img" class="item-img">
+                            <img src="${music.blob_thumb ? URL.createObjectURL(music.blob_thumb) : music.track_thumb}" alt="item-img" class="item-img">
                             <div class="item-title">${music.track_name}</div>
                         </div>
                     </a>

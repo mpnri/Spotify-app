@@ -40,7 +40,7 @@ const ProfileCard = (item : DataType, {is_shuffle}) => `
             <div class="profile-info">
                 <div class="profile-title">${item.album.album_name}</div>
                 <div class="profile-artist">
-                    <img src="${item.album.blob_thumb || item.album.album_thumb}" class="artist-img"></img>
+                    <img src="${item.album.blob_thumb ? URL.createObjectURL(item.album.blob_thumb) : item.album.album_thumb}" class="artist-img"></img>
                     <div class="artist-title">${item.album.album_composer}</div>
                 </div>
                 <div class="profile-date">
@@ -69,7 +69,7 @@ const ProfileCard = (item : DataType, {is_shuffle}) => `
 const Profile = (item : DataType, settings) => `
     <div class="profile">
         <div class="profile__img">
-            <img src="${item.album.blob_thumb || item.album.album_thumb} " alt="Presence">
+            <img src="${item.album.blob_thumb ? URL.createObjectURL(item.album.blob_thumb) : item.album.album_thumb}" alt="Presence">
         </div>
         ${ProfileCard(item, settings)}
         ${ProfileList(item.musics)}

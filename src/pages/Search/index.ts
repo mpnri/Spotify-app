@@ -43,12 +43,12 @@ export const searchLogic = () => {
                     let img, name, tag;
                     if (elm.hasOwnProperty('album')) {
                         elm = elm as DataType;
-                        img = elm.album.blob_thumb || elm.album.album_thumb;
+                        img = elm.album.blob_thumb ? URL.createObjectURL(elm.album.blob_thumb) : elm.album.album_thumb;
                         name = elm.album.album_name;
                         tag = elm.album.album_composer;
                     } else {
                         elm = elm as MusicType;
-                        img = elm.blob_thumb || elm.track_thumb;
+                        img = elm.blob_thumb ? URL.createObjectURL(elm.blob_thumb) : elm.track_thumb;
                         name = elm.track_name;
                         tag = 'Track: ' + elm.track_time;
                     }

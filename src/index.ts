@@ -23,12 +23,12 @@ database.addEventListener('upgradeneeded', e => {
                     elm.is_searched = false;
                     elm.is_downloaded = false;
                     elm.is_played = false;
-                    elm.blob_thumb = '';
-                    elm.blob_url = '';
+                    elm.blob_thumb = null;
+                    elm.blob_url = null;
                 })
                 item.album['is_searched'] = false;
                 item['id'] = item.album.id;
-                item.album['blob_thumb'] = ''
+                item.album['blob_thumb'] = null
                 store.add(item);
             });
             const storeSettings = db.createObjectStore('settings', {
