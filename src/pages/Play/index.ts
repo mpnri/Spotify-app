@@ -122,15 +122,18 @@ const playerLogic = ({ id }: { id: string; }) => {
     function load(e) {
         //! remove Event Listener Fails
         const pathList = location.pathname.split('/');
-        if (pathList[pathList.length-1] !== id) {
-            clearInterval(timer);
-            return;
-        }
+        // if (pathList[pathList.length-1] !== id) {
+        //     clearInterval(timer);
+        //     return;
+        // }
         console.log('src: ', player.src);
         modifyMusic(id, (music : MusicType) => {
+            console.log('link: ', music.track_url);
+            if (music.is_downloaded) return;
             fetch(music.track_url)
                 .then(res => res.ok ? res.blob():(()=>{throw new Error(res.statusText)})())
                 .then(data => {
+                    console.log('link: ', music.track_url);
                     modifyMusic(id, (newMusic : MusicType) => {
                         console.log(data);
                         newMusic.blob_url = data;
@@ -184,18 +187,18 @@ const playerLogic = ({ id }: { id: string; }) => {
         //! clear load method?
         clearInterval(timer);
         player.pause();
-        player.removeEventListener('click', load);
+        player.removeEventListener('loadedmetadata', load);
     })
     const leftBtn = document.querySelector('a > .left-btn') as HTMLDivElement;
     leftBtn.addEventListener('click', e => {
-        player.removeEventListener('click', load);
+        player.removeEventListener('loadedmetadata', load);
     });
 
     const rightBtn = document.querySelector('a > .right-btn') as HTMLDivElement;
     rightBtn.addEventListener('click', e => {
         console.log('right');
         
-        player.removeEventListener('click', load);
+        player.removeEventListener('loadedmetadata', load);
     });
 
 }
