@@ -16,3 +16,7 @@ pinegrow.json
 node_modules/
 dist/
 .parcel-cache/
+
+
+# template
+template/
