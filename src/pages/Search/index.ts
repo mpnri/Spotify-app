@@ -82,6 +82,7 @@ export const searchLogic = () => {
                         }
                     });
                 });
+                window['handleLinks']();
 
             }, 500);
         });

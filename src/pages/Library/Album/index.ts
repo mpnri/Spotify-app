@@ -12,7 +12,10 @@ const Album = (item : DataType, settings) => {
     console.log(item);
     
     return (''
-        + '<div class="fade album-fade"></div>'
+        + `<div class="fade album-fade" style="
+            background-image: url(${item.album.blob_thumb ? URL.createObjectURL(item.album.blob_thumb):item.album.album_thumb});
+            background-size: cover;
+        "></div>`
         + `<div class="back-icon real-back"><img src="${back}" alt="back"></div>`
         + Profile(item, settings)
         + Menu('search')

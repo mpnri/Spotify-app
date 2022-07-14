@@ -122,10 +122,11 @@ const playerLogic = ({ id }: { id: string; }) => {
     function load(e) {
         //! remove Event Listener Fails
         const pathList = location.pathname.split('/');
-        // if (pathList[pathList.length-1] !== id) {
-        //     clearInterval(timer);
-        //     return;
-        // }
+        document.querySelector('.item-tag__data')!.textContent = 'Track: ' + ~~(Math.trunc(player.duration) / 60) + ':' + (Math.trunc(player.duration) % 60 > 9 ? '' : '0') + Math.trunc(player.duration) % 60;
+        if (pathList[pathList.length-1] !== id) {
+            clearInterval(timer);
+            return;
+        }
         console.log('src: ', player.src);
         modifyMusic(id, (music : MusicType) => {
             console.log('link: ', music.track_url);

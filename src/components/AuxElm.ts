@@ -3,7 +3,8 @@ const Aux = component => {
         const database = indexedDB.open('data', 1);
         database.addEventListener('success', e => {
             const db = database.result;
-             {
+            if (db.objectStoreNames.contains('albums'))
+            {
                 const transaction = db.transaction('albums', "readonly");
                 const store = transaction.objectStore('albums');
 

@@ -39,6 +39,7 @@ database.addEventListener('upgradeneeded', e => {
                 is_repeat: false,
                 is_shuffle: false,
             })
+            console.log('build database successful');
     }
 
     
@@ -47,6 +48,32 @@ database.addEventListener('upgradeneeded', e => {
 })
 
 database.onsuccess = () => {
+    // const db = database.result;
+    // const transaction = db.transaction( ['albums', 'settings'], "readwrite");
+    // const store = transaction.objectStore('albums');
+    // store.clear();
+    // const storeSettings = transaction.objectStore('settings');
+    // storeSettings.clear();
+
+    // data.filter(elm => elm.album.album_name).forEach(item => {
+    //     item.musics.forEach(elm => {
+    //         elm.is_liked = false;
+    //         elm.is_searched = false;
+    //         elm.is_downloaded = false;
+    //         elm.is_played = false;
+    //         elm.blob_thumb = null;
+    //         elm.blob_url = null;
+    //     })
+    //     item.album['is_searched'] = false;
+    //     item['id'] = item.album.id;
+    //     item.album['blob_thumb'] = null
+    //     store.add(item);
+    // });
+    // storeSettings.add({
+    //     name: 'player',
+    //     is_repeat: false,
+    //     is_shuffle: false,
+    // })
     console.log('access database successful');
     processRoutes();
     handleRouteChange();
@@ -107,6 +134,7 @@ async function processRoutes() {
 }
 
 window['router'] = processRoutes;
+window['handleLinks'] = handleLinks;
 
 function handleLinks() {
     document.querySelectorAll('a').forEach(link =>
